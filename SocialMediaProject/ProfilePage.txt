@@ -1,0 +1,12 @@
+Scientist 18 Lahore 
+Engineer 18 America
+Singer 50 Australia
+Entreprenuer 10 Ethopia
+FreeLancer 20 Lahore 
+KFC 50 GujjarNala
+Coder 20 Lahore
+Doctor 22 Lahore
+Teacher 35 Lahore
+University 2022 Pakistan
+
+

@@ -1,0 +1,10 @@
+l230989@lhr.nu.edu.pk 123 100 Abdul Moeez
+testaccount23@yahoo.com 123456 101 Abdullah Ijaz
+demo.email57@hotmail.com public 102 Haris Jutt
+user123@example.com private 103 Abdullah Kamal
+fakeperson99@outlook.com protected 104 Bilal Razaq
+sampleemail42@aol.com object 105 Saad Ullah
+tempacc345@protonmail.com language 106 Faheem Sarwar
+trialuser88@icloud.com 123 107 Farrukh Fayyez
+newuser2024@live.com erenyeager 108 Sir Uzair
+randomemail555@inbox.com Weeb 109 FAST NUCES
