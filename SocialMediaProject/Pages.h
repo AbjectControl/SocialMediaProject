@@ -24,7 +24,7 @@ private:
 
 public:
 	Pages(int p = 0, string n = "", string date = "",int pa=0 ,int u1 = 0, int u2 = 0, int u3 = 0, string l = "", string des = "", int p1 = 0, int p2 = 0, int p3 = 0);
-	void readfile(ifstream &file);
+	void readfilePages(ifstream &file);
 
 	//SETTERS
 	void setpageID(int p);

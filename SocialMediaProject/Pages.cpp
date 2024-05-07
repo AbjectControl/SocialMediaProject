@@ -16,7 +16,7 @@ Pages::Pages(int p, string n, string date,int pa, int u1, int u2, int u3, string
 	postPageID3=p3;
 
 }
-void Pages::readfile(ifstream& file)
+void Pages::readfilePages(ifstream& file)
 {
 	string tempPageID;
 	if (getline(file, tempPageID))

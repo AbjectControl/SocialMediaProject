@@ -4,6 +4,7 @@
 #include "User.h"
 #include "ProfilePage.h" 
 #include "Posts.h"
+#include "Pages.h"
 using namespace std;
 
 int main()
@@ -64,6 +65,23 @@ int main()
         info2[i]->readfilePosts(infile2);
     }
     infile2.close();
+
+    //pages
+    const int numPages = 3;
+    ifstream infilePages("Pages.txt");
+    if (!infilePages.is_open())
+    {
+        cout << "Error opening file (Pages.txt)!" << endl;
+        return 1;
+    }
+
+    Pages* info3[numPages];
+    for (int i = 0; i < numPages; i++)
+    {
+        info3[i] = new Pages;
+        info3[i]->readfilePages(infilePages);
+    }
+    infilePages.close();
 
     ////////////////////////////////////// BOOT PAGE ////////////////////////////////////////////
     cout << "\t\t\t\t\t\t   WELCOME USER " << endl;
@@ -181,7 +199,8 @@ int main()
     cout << "Do you want to post? Type [YES] to post, or any other key to cancel." << endl;
     cin >> AgreePost;
 
-    if (AgreePost == "YES" || AgreePost == "yes") {
+    if (AgreePost == "YES" || AgreePost == "yes") 
+    {
         // Increase the number of posts
         numOfPosts += 1;
 
@@ -189,7 +208,8 @@ int main()
         Posts** newInfo2 = new Posts * [numOfPosts];
 
         // Copy existing posts to the new array
-        for (int i = 0; i < numOfPosts - 1; i++) {
+        for (int i = 0; i < numOfPosts - 1; i++) 
+        {
             newInfo2[i] = info2[i];
         }
 
@@ -203,8 +223,8 @@ int main()
 
         string content;
         cout << "Enter content: ";
-        cin.ignore(); // Ignore newline character left in the input buffer
-        getline(cin, content); // Read the entire line of input
+        cin.ignore(); 
+        getline(cin, content);
         newInfo2[numOfPosts - 1]->SetcontentPost(content);
         newInfo2[numOfPosts - 1]->SetTimePost("3:30 PM");
 
@@ -214,6 +234,40 @@ int main()
         // Point info2 to the new array
         info2 = newInfo2;
     }
+    //////////////////////////////////////////// PAGES //////////////////////////////////////////////////////
+
+    string showPage;
+    cout << "\t\t\t\t****************************************************" << endl;
+    cout << endl;
+    cout << endl;
+    cout << "Do you want to Visit PAGES? Type [YES] to post, or any other key to cancel." << endl;
+    cin >> showPage;
+    if (showPage == "YES" || showPage == "yes")
+    { // problem in main pages loop error
+        /*for (int i = 0;i < numPages;i++)
+        {
+            for (int j = 0;j <numAccounts;j++)
+            {
+                if (info[mainUserID]->getId() == info3[i]->getUserPageID1() || info[mainUserID]->getId() == info3[i]->getUserPageID2() || info[mainUserID]->getId() == info3[i]->getUserPageID3())
+                {
+                    cout << "\t\t\t\t    PAGE ID : " << info3[j]->getpageID() << endl << endl;
+                    cout << "\t\t\t\t\t PAGE NAME " << endl;
+                    cout << "\t\t\t\t       " << info3[j]->getPageName() << endl;
+
+                }
+            }
+        }*/
+
+    }
+
+
+
+
+
+
+
+
+
 
 
     //////////////////////////////////////////// OUTPUT DATA ////////////////////////////////////////////////
@@ -261,6 +315,11 @@ int main()
     {
         delete info[i];  // email.txt
         delete info1[i]; // profilepage.txt
+    }
+    for (int i = 0; i < numPages; i++)
+    {
+        delete info3[i];  // pages.txt
+         
     }
     // posts.txt de allocation
     for (int i = 0; i < numOfPosts; i++)
