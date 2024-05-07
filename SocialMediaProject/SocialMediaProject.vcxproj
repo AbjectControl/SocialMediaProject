@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Pages.cpp" />
     <ClCompile Include="Posts.cpp" />
     <ClCompile Include="ProfilePage.cpp" />
     <ClCompile Include="SocialMediaProject.cpp" />
@@ -136,11 +137,13 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="email.txt" />
+    <Text Include="Pages.txt" />
     <Text Include="Posts.txt" />
     <Text Include="ProfilePage.txt" />
     <Text Include="Size.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Pages.h" />
     <ClInclude Include="Posts.h" />
     <ClInclude Include="ProfilePage.h" />
     <ClInclude Include="User.h" />

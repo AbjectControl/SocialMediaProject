@@ -269,7 +269,7 @@ int main()
     }
     delete[] info2;
     info2 = nullptr;
-    int m1;
+   
 
 
 

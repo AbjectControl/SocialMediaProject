@@ -33,12 +33,16 @@
     <ClCompile Include="Posts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Pages.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="email.txt" />
     <Text Include="ProfilePage.txt" />
     <Text Include="Posts.txt" />
     <Text Include="Size.txt" />
+    <Text Include="Pages.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User.h">
@@ -48,6 +52,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Posts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pages.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
