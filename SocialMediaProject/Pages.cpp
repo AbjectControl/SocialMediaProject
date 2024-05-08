@@ -77,6 +77,10 @@ void Pages::setPageFdate(const string& d)
 {
 	PageFdate = d;
 }
+void Pages::setpageFollowers(int f)
+{
+	pageFollowers = f;
+}
 void Pages::setUserPageID1(int y)
 {
 	UserPageID1 = y;
@@ -122,6 +126,10 @@ string Pages::getPageName()
 string Pages::getPageFdate()
 {
 	return PageFdate;
+}
+int Pages::getpagefollowers()
+{
+	return pageFollowers;
 }
 int Pages::getUserPageID1()
 {

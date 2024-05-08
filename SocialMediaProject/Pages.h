@@ -30,6 +30,7 @@ public:
 	void setpageID(int p);
 	void setPageName(const string& n);
 	void setPageFdate(const string& d);
+	void setpageFollowers(int f);
 	void setUserPageID1(int y);
 	void setUserPageID2(int e);
 	void setUserPageID3(int g);
@@ -43,6 +44,7 @@ public:
 	int getpageID();
 	string getPageName();
 	string getPageFdate();
+	int getpagefollowers();
 	int getUserPageID1();
 	int getUserPageID2();
 	int getUserPageID3();

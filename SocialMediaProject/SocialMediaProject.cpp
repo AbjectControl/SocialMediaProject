@@ -174,7 +174,7 @@ int main()
     }
     ////////////////////////////////////////////HOME PAGE ///////////////////////////////////////////////////
     string AgreeHome;
-    cout << "Do you want to Visit HomePage? Type [YES] to post, or any other key to cancel." << endl;
+    cout << "Do you want to Visit HomePage? Type [YES] to visit, or any other key to cancel." << endl;
     cin >> AgreeHome;
     if(AgreeHome == "YES" || AgreeHome == "yes")
     {
@@ -186,7 +186,7 @@ int main()
             {
                 if (info2[i]->getuserPostID() == info[j]->getId())
                 {
-                    cout << "USER NMAE : " << info[j]->getFname() << " " << info[j]->getLname() << endl;
+                    cout << "USER NAME : " << info[j]->getFname() << " " << info[j]->getLname() << endl;
                     info2[i]->DisplayPosts();
                     cout << "\t\t\t\t****************************************************" << endl;
                     cout << endl;
@@ -240,24 +240,53 @@ int main()
     cout << "\t\t\t\t****************************************************" << endl;
     cout << endl;
     cout << endl;
-    cout << "Do you want to Visit PAGES? Type [YES] to post, or any other key to cancel." << endl;
+    cout << "Do you want to Visit PAGES? Type [YES] to visit, or any other key to cancel." << endl;
     cin >> showPage;
     if (showPage == "YES" || showPage == "yes")
     { // problem in main pages loop error
-        /*for (int i = 0;i < numPages;i++)
-        {
-            for (int j = 0;j <numAccounts;j++)
+        bool pagefound = false;
+        cout << "\t\t\t\t****************************************************" << endl;
+            for (int i = 0;i <numPages;i++)
             {
                 if (info[mainUserID]->getId() == info3[i]->getUserPageID1() || info[mainUserID]->getId() == info3[i]->getUserPageID2() || info[mainUserID]->getId() == info3[i]->getUserPageID3())
                 {
-                    cout << "\t\t\t\t    PAGE ID : " << info3[j]->getpageID() << endl << endl;
-                    cout << "\t\t\t\t\t PAGE NAME " << endl;
-                    cout << "\t\t\t\t       " << info3[j]->getPageName() << endl;
-
+                    cout << "\t\t\t\t\t\t     PAGE ID : " << info3[i]->getpageID() << endl << endl;
+                    cout << "\t\t\t\t\t\t      PAGE NAME " << endl;
+                    cout << "\t\t\t\t\t\t   *|(" << info3[i]->getPageName() << ")|*" << endl << endl;
+                    cout << "LIKES ON PAGE <{ " << info3[i]->getpagefollowers() << " }>" << endl;
+                    cout << " Location : " << info3[i]->getPagelocation() << endl;
+                    cout << "Page Description is :" << endl;
+                    cout << info3[i]->getPagedescription() << endl;
+                    cout << "{(Followers)} " << endl << endl;;
+                    for (int j = 0;j < numAccounts;j++)
+                    {
+                        if (info[j]->getId() == info3[i]->getUserPageID1() || info[j]->getId() == info3[i]->getUserPageID2() || info[j]->getId() == info3[i]->getUserPageID3())
+                        {
+                            cout << info[j]->getFname() << " " << info[j]->getLname() << endl;
+                        }
+                    }
+                    cout << endl << endl;
+                    pagefound = true;
                 }
             }
-        }*/
-
+            for (int i = 0;i < numPages;i++)
+            {
+                for (int j = 0;j < numOfPosts;j++)
+                {
+                    if ( info3[i]->getpostPageID1()== info2[j]->getPostID() || info3[i]->getpostPageID2()== info2[j]->getPostID() || info3[i]->getpostPageID3()== info2[j]->getPostID())
+                    {
+                        cout <<"POST ID "<< info2[j]->getPostID() << endl;
+                        cout << "   POST CONTENT ";
+                        cout << info2[j]->getcontentPost() << endl;
+                        cout << "\t\t\t\t****************************************************" << endl;
+                        cout << endl;
+                    }
+                }
+            }
+            if (pagefound == false)
+            {
+                cout << " USER " << info[mainUserID]->getFname() << " " << info[mainUserID]->getLname() << " doesnot follow any page " << endl;
+            }
     }
 
 
