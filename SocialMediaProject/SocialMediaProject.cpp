@@ -245,11 +245,13 @@ int main()
     if (showPage == "YES" || showPage == "yes")
     { // problem in main pages loop error
         bool pagefound = false;
+        int mainPageID = 0;
         cout << "\t\t\t\t****************************************************" << endl;
             for (int i = 0;i <numPages;i++)
             {
                 if (info[mainUserID]->getId() == info3[i]->getUserPageID1() || info[mainUserID]->getId() == info3[i]->getUserPageID2() || info[mainUserID]->getId() == info3[i]->getUserPageID3())
                 {
+                    mainPageID = i;
                     cout << "\t\t\t\t\t\t     PAGE ID : " << info3[i]->getpageID() << endl << endl;
                     cout << "\t\t\t\t\t\t      PAGE NAME " << endl;
                     cout << "\t\t\t\t\t\t   *|(" << info3[i]->getPageName() << ")|*" << endl << endl;
@@ -269,25 +271,20 @@ int main()
                     pagefound = true;
                 }
             }
-            for (int i = 0;i < numPages;i++)
-            {
-                for (int j = 0;j < numOfPosts;j++)
-                {
-                    if ( info3[i]->getpostPageID1()== info2[j]->getPostID() || info3[i]->getpostPageID2()== info2[j]->getPostID() || info3[i]->getpostPageID3()== info2[j]->getPostID())
-                    {
-                        cout <<"POST ID "<< info2[j]->getPostID() << endl;
-                        cout << "   POST CONTENT ";
-                        cout << info2[j]->getcontentPost() << endl;
-                        cout << "\t\t\t\t****************************************************" << endl;
-                        cout << endl;
-                    }
-                }
-            }
             if (pagefound == false)
             {
                 cout << " USER " << info[mainUserID]->getFname() << " " << info[mainUserID]->getLname() << " doesnot follow any page " << endl;
             }
+            for (int i = 0;i < numOfPosts;i++)
+            {
+               
+                if (info3[mainPageID]->getpostPageID1() == info2[i]->getPostID()|| info3[mainPageID]->getpostPageID2() == info2[i]->getPostID()|| info3[mainPageID]->getpostPageID3() == info2[i]->getPostID())
+                {
+                    info2[i]->DisplayPosts();
+                }
+            }
     }
+    ////////////////////////////////////////COMMENTS//////////////////////////////////////////////////////
 
 
 

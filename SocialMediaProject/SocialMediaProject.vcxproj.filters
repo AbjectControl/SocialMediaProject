@@ -36,6 +36,9 @@
     <ClCompile Include="Pages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Comments.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="email.txt" />
@@ -43,6 +46,7 @@
     <Text Include="Posts.txt" />
     <Text Include="Size.txt" />
     <Text Include="Pages.txt" />
+    <Text Include="Comments.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User.h">
@@ -55,6 +59,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pages.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Comments.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

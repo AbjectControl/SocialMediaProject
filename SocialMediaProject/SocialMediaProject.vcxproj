@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Comments.cpp" />
     <ClCompile Include="Pages.cpp" />
     <ClCompile Include="Posts.cpp" />
     <ClCompile Include="ProfilePage.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Comments.txt" />
     <Text Include="email.txt" />
     <Text Include="Pages.txt" />
     <Text Include="Posts.txt" />
@@ -143,6 +145,7 @@
     <Text Include="Size.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Comments.h" />
     <ClInclude Include="Pages.h" />
     <ClInclude Include="Posts.h" />
     <ClInclude Include="ProfilePage.h" />
