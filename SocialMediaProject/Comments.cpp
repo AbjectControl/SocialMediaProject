@@ -34,6 +34,7 @@ void Comments::DisplayComments()
 	//cout << "COMMENT USER ID : " << CommentUserID << endl;
 	cout << "<^*[COMMENT CONTENT]*^> : " << endl;
 	cout << CommentContent << endl;
+	cout << endl;
 }
 //SETTERS
 void Comments::setCommentID(int i)

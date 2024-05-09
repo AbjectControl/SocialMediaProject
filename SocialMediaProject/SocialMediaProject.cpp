@@ -5,6 +5,7 @@
 #include "ProfilePage.h" 
 #include "Posts.h"
 #include "Pages.h"
+#include "Comments.h"
 using namespace std;
 
 int main()
@@ -82,7 +83,23 @@ int main()
         info3[i]->readfilePages(infilePages);
     }
     infilePages.close();
-
+    // comments
+    const int numComments = 5;
+    ifstream infileComments("Comments.txt");
+    if (!infileComments.is_open())
+    {
+        cout << "Error opening file (Comments.txt)!" << endl;
+        return 1;
+    }
+    Comments* info4[numComments];
+    for (int i = 0; i < numComments; i++)
+    {
+        info4[i] = new Comments;
+        info4[i]->readfileComments(infileComments);
+    }
+    infileComments.close();
+    
+     
     ////////////////////////////////////// BOOT PAGE ////////////////////////////////////////////
     cout << "\t\t\t\t\t\t   WELCOME USER " << endl;
     for (int i = 0;i < 1000000000;i++);
@@ -128,165 +145,212 @@ int main()
     } while (!loggedIn);
 
     ////////////////////////////////////////PASSWORD CHANGE/////////////////////////////////////////////
-    string AgreePAScha;
-    cout << "Do You want to change password if then Type [YES] else any other " << endl;
-    cin >> AgreePAScha;
-    if (AgreePAScha == "YES" || AgreePAScha == "yes")
-    {
-        string passwordchange;
-        cout << "Enter new Password " << endl;
-        cin >> passwordchange;
-        cout << " Password Changed !!!!!!! " << endl;
-        info[mainUserID]->setPassword(passwordchange);
-    }
-    ////////////////////////////////////////NAME CHANGE/////////////////////////////////////////////
-    string AgreeNAMEcha;
-    cout << "Do You want to change USER NAME if then Type [YES] else any other " << endl;
-    cin >> AgreeNAMEcha;
-    if (AgreeNAMEcha == "YES" || AgreeNAMEcha == "yes")
-    {
-        string fNAMEchange;
-        cout << "Enter new FIRST NAME " << endl;
-        cin >> fNAMEchange;
-        string lNAMEchange;
-        cout << "Enter new LAST NAME " << endl;
-        cin >> lNAMEchange;
-        cout << " NAME Changed !!!!!!! " << endl;
-        info[mainUserID]->setFname(fNAMEchange);
-        info[mainUserID]->setLname(lNAMEchange);
-    }
+    //string AgreePAScha;
+    //cout << "Do You want to change password if then Type [YES] else any other " << endl;
+    //cin >> AgreePAScha;
+    //if (AgreePAScha == "YES" || AgreePAScha == "yes")
+    //{
+    //    string passwordchange;
+    //    cout << "Enter new Password " << endl;
+    //    cin >> passwordchange;
+    //    cout << " Password Changed !!!!!!! " << endl;
+    //    info[mainUserID]->setPassword(passwordchange);
+    //}
+    //////////////////////////////////////////NAME CHANGE/////////////////////////////////////////////
+    //string AgreeNAMEcha;
+    //cout << "Do You want to change USER NAME if then Type [YES] else any other " << endl;
+    //cin >> AgreeNAMEcha;
+    //if (AgreeNAMEcha == "YES" || AgreeNAMEcha == "yes")
+    //{
+    //    string fNAMEchange;
+    //    cout << "Enter new FIRST NAME " << endl;
+    //    cin >> fNAMEchange;
+    //    string lNAMEchange;
+    //    cout << "Enter new LAST NAME " << endl;
+    //    cin >> lNAMEchange;
+    //    cout << " NAME Changed !!!!!!! " << endl;
+    //    info[mainUserID]->setFname(fNAMEchange);
+    //    info[mainUserID]->setLname(lNAMEchange);
+    //}
 
-    /////////////////////////////////////////// Profile Page ////////////////////////////////////////////////
-    cout << endl << endl;
-    cout << "\t\t\t\t****************************************************" << endl;
-    cout << "\t\t\t\t\t\t    **(PROFILE PAGE)**" << endl;
-    cout << "\t\t\t\t\t               " << info[mainUserID]->getFname() << " " << info[mainUserID]->getLname() << endl;
-    cout << " PERSONAL DETAILS : " << endl;
-    info1[mainUserID]->DisplayP(); // displaying personal details
-    cout << endl << endl;
-    for (int i = 0;i < numOfPosts;i++)
+    ///////////////////////////////////////////// Profile Page ////////////////////////////////////////////////
+    //cout << endl << endl;
+    //cout << "\t\t\t\t****************************************************" << endl;
+    //cout << "\t\t\t\t\t\t    **(PROFILE PAGE)**" << endl;
+    //cout << "\t\t\t\t\t               " << info[mainUserID]->getFname() << " " << info[mainUserID]->getLname() << endl;
+    //cout << " PERSONAL DETAILS : " << endl;
+    //info1[mainUserID]->DisplayP(); // displaying personal details
+    //cout << endl << endl;
+    //for (int i = 0;i < numOfPosts;i++)
+    //{
+    //    if (info2[i]->getuserPostID() == info[mainUserID]->getId())
+    //    {
+    //        info2[i]->DisplayPosts();
+    //    }
+
+    //}
+    //////////////////////////////////////////////HOME PAGE ///////////////////////////////////////////////////
+    //string AgreeHome;
+    //cout << "Do you want to Visit HomePage? Type [YES] to visit, or any other key to cancel." << endl;
+    //cin >> AgreeHome;
+    //if(AgreeHome == "YES" || AgreeHome == "yes")
+    //{
+    //    cout << "\t\t\t\t****************************************************" << endl;
+    //    cout << "\t\t\t\t\t\t         HOME PAGE " << endl;
+    //    for (int i = 0;i < numOfPosts;i++)
+    //    {
+    //        for (int j = 0;j < numAccounts;j++)
+    //        {
+    //            if (info2[i]->getuserPostID() == info[j]->getId())
+    //            {
+    //                cout << "USER NAME : " << info[j]->getFname() << " " << info[j]->getLname() << endl;
+    //                info2[i]->DisplayPosts();
+    //                cout << "\t\t\t\t****************************************************" << endl;
+    //                cout << endl;
+    //            }
+    //        }
+    //    }
+    //}
+    //// create new post
+    //string AgreePost;
+    //cout << "Do you want to post? Type [YES] to post, or any other key to cancel." << endl;
+    //cin >> AgreePost;
+
+    //if (AgreePost == "YES" || AgreePost == "yes") 
+    //{
+    //    // Increase the number of posts
+    //    numOfPosts += 1;
+
+    //    // Create a new array to hold the updated posts
+    //    Posts** newInfo2 = new Posts * [numOfPosts];
+
+    //    // Copy existing posts to the new array
+    //    for (int i = 0; i < numOfPosts - 1; i++) 
+    //    {
+    //        newInfo2[i] = info2[i];
+    //    }
+
+    //    // Allocate memory for the new post
+    //    newInfo2[numOfPosts - 1] = new Posts;
+
+    //    // Set properties of the new post
+    //    newInfo2[numOfPosts - 1]->SetPostID(numOfPosts);
+    //    int temp = info[mainUserID]->getId();
+    //    newInfo2[numOfPosts - 1]->SetuserPostID(temp);
+
+    //    string content;
+    //    cout << "Enter content: ";
+    //    cin.ignore(); 
+    //    getline(cin, content);
+    //    newInfo2[numOfPosts - 1]->SetcontentPost(content);
+    //    newInfo2[numOfPosts - 1]->SetTimePost("3:30 PM");
+
+    //    // Free the memory of the old info2 array (including posts)
+    //    delete[] info2;
+
+    //    // Point info2 to the new array
+    //    info2 = newInfo2;
+    //}
+    ////////////////////////////////////////////// PAGES //////////////////////////////////////////////////////
+
+    //string showPage;
+    //cout << "\t\t\t\t****************************************************" << endl;
+    //cout << endl;
+    //cout << endl;
+    //cout << "Do you want to Visit PAGES? Type [YES] to visit, or any other key to cancel." << endl;
+    //cin >> showPage;
+    //if (showPage == "YES" || showPage == "yes")
+    //{ // problem in main pages loop error
+    //    bool pagefound = false;
+    //    int mainPageID = 0;
+    //    cout << "\t\t\t\t****************************************************" << endl;
+    //        for (int i = 0;i <numPages;i++)
+    //        {
+    //            if (info[mainUserID]->getId() == info3[i]->getUserPageID1() || info[mainUserID]->getId() == info3[i]->getUserPageID2() || info[mainUserID]->getId() == info3[i]->getUserPageID3())
+    //            {
+    //                mainPageID = i;
+    //                cout << "\t\t\t\t\t\t     PAGE ID : " << info3[i]->getpageID() << endl << endl;
+    //                cout << "\t\t\t\t\t\t      PAGE NAME " << endl;
+    //                cout << "\t\t\t\t\t\t   *|(" << info3[i]->getPageName() << ")|*" << endl << endl;
+    //                cout << "LIKES ON PAGE <{ " << info3[i]->getpagefollowers() << " }>" << endl;
+    //                cout << " Location : " << info3[i]->getPagelocation() << endl;
+    //                cout << "Page Description is :" << endl;
+    //                cout << info3[i]->getPagedescription() << endl;
+    //                cout << "{(Followers)} " << endl << endl;;
+    //                for (int j = 0;j < numAccounts;j++)
+    //                {
+    //                    if (info[j]->getId() == info3[i]->getUserPageID1() || info[j]->getId() == info3[i]->getUserPageID2() || info[j]->getId() == info3[i]->getUserPageID3())
+    //                    {
+    //                        cout << info[j]->getFname() << " " << info[j]->getLname() << endl;
+    //                    }
+    //                }
+    //                cout << endl << endl;
+    //                pagefound = true;
+    //            }
+    //        }
+    //        if (pagefound == false)
+    //        {
+    //            cout << " USER " << info[mainUserID]->getFname() << " " << info[mainUserID]->getLname() << " doesnot follow any page " << endl;
+    //        }
+    //        for (int i = 0;i < numOfPosts;i++)
+    //        {
+    //           
+    //            if (info3[mainPageID]->getpostPageID1() == info2[i]->getPostID()|| info3[mainPageID]->getpostPageID2() == info2[i]->getPostID()|| info3[mainPageID]->getpostPageID3() == info2[i]->getPostID())
+    //            {
+    //                info2[i]->DisplayPosts();
+    //            }
+    //        }
+    //}
+    ////////////////////////////////////////COMMENTS//////////////////////////////////////////////////////
+    string AgreeComments;
+    cout << "Do you want to watch Comments on Posts ? Type [YES] to visit, or any other key to cancel." << endl;
+    cin >> AgreeComments;
+    if (AgreeComments == "YES" || AgreeComments == "yes")
     {
-        if (info2[i]->getuserPostID() == info[mainUserID]->getId())
+        int i = 0;
+        cout << "Enter the ID of post you want to see Comments from 1 to " << numOfPosts << endl;
+        cin >> i;
+        bool postid = false;
+        while (postid == false)
         {
-            info2[i]->DisplayPosts();
+            if (i<=0 || i>numOfPosts)
+            {
+                cout << " Invalid Post ID! Enter again " << endl;
+                cin >> i;
+            }
+            else if (i > 0 || i < numOfPosts)
+            {
+                postid = true;
+            }
         }
-
-    }
-    ////////////////////////////////////////////HOME PAGE ///////////////////////////////////////////////////
-    string AgreeHome;
-    cout << "Do you want to Visit HomePage? Type [YES] to visit, or any other key to cancel." << endl;
-    cin >> AgreeHome;
-    if(AgreeHome == "YES" || AgreeHome == "yes")
-    {
-        cout << "\t\t\t\t****************************************************" << endl;
-        cout << "\t\t\t\t\t\t         HOME PAGE " << endl;
-        for (int i = 0;i < numOfPosts;i++)
+        if (i>0||i<numOfPosts)
         {
             for (int j = 0;j < numAccounts;j++)
             {
-                if (info2[i]->getuserPostID() == info[j]->getId())
+                if (info[j]->getId()== info2[i - 1]->getuserPostID())
                 {
-                    cout << "USER NAME : " << info[j]->getFname() << " " << info[j]->getLname() << endl;
-                    info2[i]->DisplayPosts();
-                    cout << "\t\t\t\t****************************************************" << endl;
-                    cout << endl;
+                    cout << info[j]->getFname() << " " << info[j]->getLname() << endl;
                 }
             }
-        }
-    }
-    // create new post
-    string AgreePost;
-    cout << "Do you want to post? Type [YES] to post, or any other key to cancel." << endl;
-    cin >> AgreePost;
-
-    if (AgreePost == "YES" || AgreePost == "yes") 
-    {
-        // Increase the number of posts
-        numOfPosts += 1;
-
-        // Create a new array to hold the updated posts
-        Posts** newInfo2 = new Posts * [numOfPosts];
-
-        // Copy existing posts to the new array
-        for (int i = 0; i < numOfPosts - 1; i++) 
-        {
-            newInfo2[i] = info2[i];
-        }
-
-        // Allocate memory for the new post
-        newInfo2[numOfPosts - 1] = new Posts;
-
-        // Set properties of the new post
-        newInfo2[numOfPosts - 1]->SetPostID(numOfPosts);
-        int temp = info[mainUserID]->getId();
-        newInfo2[numOfPosts - 1]->SetuserPostID(temp);
-
-        string content;
-        cout << "Enter content: ";
-        cin.ignore(); 
-        getline(cin, content);
-        newInfo2[numOfPosts - 1]->SetcontentPost(content);
-        newInfo2[numOfPosts - 1]->SetTimePost("3:30 PM");
-
-        // Free the memory of the old info2 array (including posts)
-        delete[] info2;
-
-        // Point info2 to the new array
-        info2 = newInfo2;
-    }
-    //////////////////////////////////////////// PAGES //////////////////////////////////////////////////////
-
-    string showPage;
-    cout << "\t\t\t\t****************************************************" << endl;
-    cout << endl;
-    cout << endl;
-    cout << "Do you want to Visit PAGES? Type [YES] to visit, or any other key to cancel." << endl;
-    cin >> showPage;
-    if (showPage == "YES" || showPage == "yes")
-    { // problem in main pages loop error
-        bool pagefound = false;
-        int mainPageID = 0;
-        cout << "\t\t\t\t****************************************************" << endl;
-            for (int i = 0;i <numPages;i++)
+            info2[i-1]->DisplayPosts();
+            cout << " ((((COMMENTS))))" << endl;
+            for (int j = 0;j < numComments;j++)
             {
-                if (info[mainUserID]->getId() == info3[i]->getUserPageID1() || info[mainUserID]->getId() == info3[i]->getUserPageID2() || info[mainUserID]->getId() == info3[i]->getUserPageID3())
+                if (info4[j]->getCommentPostID() == info2[i - 1]->getPostID())
                 {
-                    mainPageID = i;
-                    cout << "\t\t\t\t\t\t     PAGE ID : " << info3[i]->getpageID() << endl << endl;
-                    cout << "\t\t\t\t\t\t      PAGE NAME " << endl;
-                    cout << "\t\t\t\t\t\t   *|(" << info3[i]->getPageName() << ")|*" << endl << endl;
-                    cout << "LIKES ON PAGE <{ " << info3[i]->getpagefollowers() << " }>" << endl;
-                    cout << " Location : " << info3[i]->getPagelocation() << endl;
-                    cout << "Page Description is :" << endl;
-                    cout << info3[i]->getPagedescription() << endl;
-                    cout << "{(Followers)} " << endl << endl;;
-                    for (int j = 0;j < numAccounts;j++)
+                    for (int k = 0;k < numAccounts;k++)
                     {
-                        if (info[j]->getId() == info3[i]->getUserPageID1() || info[j]->getId() == info3[i]->getUserPageID2() || info[j]->getId() == info3[i]->getUserPageID3())
+                        if (info4[j]->getCommentUserID() ==info[k]->getId())
                         {
-                            cout << info[j]->getFname() << " " << info[j]->getLname() << endl;
+                            cout << info[k]->getFname() << " " << info[k]->getLname() << endl;
+                            info4[j]->DisplayComments();
                         }
                     }
-                    cout << endl << endl;
-                    pagefound = true;
                 }
             }
-            if (pagefound == false)
-            {
-                cout << " USER " << info[mainUserID]->getFname() << " " << info[mainUserID]->getLname() << " doesnot follow any page " << endl;
-            }
-            for (int i = 0;i < numOfPosts;i++)
-            {
-               
-                if (info3[mainPageID]->getpostPageID1() == info2[i]->getPostID()|| info3[mainPageID]->getpostPageID2() == info2[i]->getPostID()|| info3[mainPageID]->getpostPageID3() == info2[i]->getPostID())
-                {
-                    info2[i]->DisplayPosts();
-                }
-            }
+        }
     }
-    ////////////////////////////////////////COMMENTS//////////////////////////////////////////////////////
-
-
+    string Agreecomment_Add;
 
 
 
@@ -354,7 +418,11 @@ int main()
     }
     delete[] info2;
     info2 = nullptr;
-   
+   // comments.txt
+    for (int i = 0; i < numComments; i++)
+    {
+        delete info4[i];  // comments.txt
+    }
 
 
 

@@ -131,6 +131,7 @@
     <ClCompile Include="Pages.cpp" />
     <ClCompile Include="Posts.cpp" />
     <ClCompile Include="ProfilePage.cpp" />
+    <ClCompile Include="SocialMediaAPP.cpp" />
     <ClCompile Include="SocialMediaProject.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="test2.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Pages.h" />
     <ClInclude Include="Posts.h" />
     <ClInclude Include="ProfilePage.h" />
+    <ClInclude Include="SocialApp.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

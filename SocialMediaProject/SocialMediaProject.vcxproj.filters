@@ -39,6 +39,9 @@
     <ClCompile Include="Comments.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SocialMediaAPP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="email.txt" />
@@ -62,6 +65,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Comments.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SocialApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
