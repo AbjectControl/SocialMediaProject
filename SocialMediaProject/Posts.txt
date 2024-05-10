@@ -102,3 +102,15 @@ This is Just a trial to see code
 100
 we are in class
 3:30 PM
+27
+102
+TXT size file doidnt change
+3:30 PM
+28
+102
+it worked 
+3:30 PM
+29
+102
+now I have also done in function
+3:30 PM

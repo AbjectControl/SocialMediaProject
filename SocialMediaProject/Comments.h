@@ -17,6 +17,7 @@ private:
 public:
 	Comments(int c = 0, int p = 0, int u = 0, string con = "");
 	void readfileComments(ifstream& file);
+	void outputfilecomments(ofstream& file);
 	void DisplayComments();
 	//SETTERS
 	void setCommentID(int i);

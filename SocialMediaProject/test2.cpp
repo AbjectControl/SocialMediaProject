@@ -1,114 +1,26 @@
 //#include <iostream>
 //#include <fstream>
 //#include <string>
-//#include "raylib.h"
 //#include "User.h"
-//#include "ProfilePage.h"
+//#include "ProfilePage.h" 
 //#include "Posts.h"
+//#include "Pages.h"
+//#include "Comments.h"
 //using namespace std;
-//
-//// Function to render a text input box and return the entered text
-//string DrawTextInputBox(int posX, int posY, int width, int height, const char* defaultText)
-//{
-//    const int textSize = 20;
-//    const int padding = 5;
-//
-//    char buffer[256] = ""; // Buffer to store user input
-//
-//    bool textBoxActive = false;
-//    Rectangle textBoxRect = { posX, posY, width, height };
-//
-//    while (!WindowShouldClose())
-//    {
-//        // Begin drawing
-//        BeginDrawing();
-//        ClearBackground(RAYWHITE);
-//
-//        // Draw text box outline
-//        DrawRectangleLinesEx(textBoxRect, 2, BLACK);
-//
-//        // Draw text inside the text box
-//        if (textBoxActive)
-//        {
-//            DrawText(buffer, posX + padding, posY + padding, textSize, BLACK);
-//        }
-//        else
-//        {
-//            DrawText(defaultText, posX + padding, posY + padding, textSize, GRAY);
-//        }
-//
-//        // Check for mouse input to activate text box
-//        if (CheckCollisionPointRec(GetMousePosition(), textBoxRect))
-//        {
-//            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-//            {
-//                textBoxActive = true;
-//            }
-//        }
-//        else
-//        {
-//            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-//            {
-//                textBoxActive = false;
-//            }
-//        }
-//
-//        // Check for keyboard input when text box is active
-//        if (textBoxActive)
-//        {
-//            int key = GetKeyPressed();
-//
-//            if (key != KEY_NULL)
-//            {
-//                // Append character to buffer if it's a valid text input
-//                if ((key >= 32) && (key <= 125) && (strlen(buffer) < sizeof(buffer) - 1))
-//                {
-//                    int len = strlen(buffer);
-//                    buffer[len] = static_cast<char>(key);
-//                    buffer[len + 1] = '\0';
-//                }
-//                else if (key == KEY_BACKSPACE)
-//                {
-//                    // Remove last character from buffer on backspace
-//                    int len = strlen(buffer);
-//                    if (len > 0)
-//                    {
-//                        buffer[len - 1] = '\0';
-//                    }
-//                }
-//            }
-//        }
-//
-//        // End drawing
-//        EndDrawing();
-//    }
-//
-//    return string(buffer);
-//}
 //
 //int main()
 //{
+//    //////////////////////////////////////////// DATA INPUT /////////////////////////////////////
 //    const int numAccounts = 10;
-//    int numOfPosts = 0;
-//    int screenWidth = 800;
-//    int screenHeight = 600;
 //
-//    // Initialize window and raylib
-//    InitWindow(screenWidth, screenHeight, "Social Media App");
-//
-//    // Load data from files
+//    // For email/user input
 //    ifstream infile("email.txt");
-//    ifstream infile1("ProfilePage.txt");
-//    ifstream infile2("Posts.txt");
-//    ifstream infilePosts("Size.txt");
-//
-//    if (!infile.is_open() || !infile1.is_open() || !infile2.is_open() || !infilePosts.is_open())
+//    if (!infile.is_open())
 //    {
-//        cout << "Error opening file!" << endl;
+//        cout << "Error opening file (email.txt)!" << endl;
 //        return 1;
 //    }
 //
-//    // Load user data
 //    User* info[numAccounts];
 //    for (int i = 0; i < numAccounts; i++)
 //    {
@@ -117,7 +29,14 @@
 //    }
 //    infile.close();
 //
-//    // Load profile data
+//    // For ProfilePage input
+//    ifstream infile1("ProfilePage.txt");
+//    if (!infile1.is_open())
+//    {
+//        cout << "Error opening file (Profile.txt)!" << endl;
+//        return 1;
+//    }
+//
 //    ProfilePage* info1[numAccounts];
 //    for (int i = 0; i < numAccounts; i++)
 //    {
@@ -125,8 +44,20 @@
 //        info1[i]->readfilePP(infile1);
 //    }
 //    infile1.close();
-//
-//    // Load posts data and post count
+//    // For Posts
+//    ifstream infile2("Posts.txt");
+//    if (!infile2.is_open())
+//    {
+//        cout << "Error opening file (Posts.txt)!" << endl;
+//        return 1;
+//    }
+//    ifstream infilePosts("Size.txt"); // this is due to storing size for next restart and make new posts
+//    if (!infilePosts.is_open())
+//    {
+//        cout << "Error opening file (Size.txt)!" << endl;
+//        return 1;
+//    }
+//    int numOfPosts;
 //    infilePosts >> numOfPosts;
 //    Posts** info2 = new Posts * [numOfPosts];
 //    for (int i = 0; i < numOfPosts; i++)
@@ -135,136 +66,411 @@
 //        info2[i]->readfilePosts(infile2);
 //    }
 //    infile2.close();
-//    infilePosts.close();
 //
-//    // Main game loop
-//    while (!WindowShouldClose())
+//    //pages
+//    const int numPages = 3;
+//    ifstream infilePages("Pages.txt");
+//    if (!infilePages.is_open())
 //    {
-//        const int screenWidth = 800;
-//        const int screenHeight = 600;
+//        cout << "Error opening file (Pages.txt)!" << endl;
+//        return 1;
+//    }
 //
-//        InitWindow(screenWidth, screenHeight, "Login Form");
+//    Pages* info3[numPages];
+//    for (int i = 0; i < numPages; i++)
+//    {
+//        info3[i] = new Pages;
+//        info3[i]->readfilePages(infilePages);
+//    }
+//    infilePages.close();
+//    // comments
+//    const int numComments = 5;
+//    ifstream infileComments("Comments.txt");
+//    if (!infileComments.is_open())
+//    {
+//        cout << "Error opening file (Comments.txt)!" << endl;
+//        return 1;
+//    }
+//    Comments* info4[numComments];
+//    for (int i = 0; i < numComments; i++)
+//    {
+//        info4[i] = new Comments;
+//        info4[i]->readfileComments(infileComments);
+//    }
+//    infileComments.close();
 //
-//        const int textFieldWidth = 300;
-//        const int textFieldHeight = 40;
-//        const int buttonWidth = 120;
-//        const int buttonHeight = 40;
 //
-//        string userEmail = "";
-//        string userPassword = "";
+//    ////////////////////////////////////// BOOT PAGE ////////////////////////////////////////////
+//    cout << "\t\t\t\t\t\t   WELCOME USER " << endl;
+//    for (int i = 0;i < 1000000000;i++);
 //
-//        bool loggedIn = false;
-//        bool showLoginError = false;
+//    /////////////////////////////////////////////////LOGIN PAGE////////////////////////////////////////////
+//    string mainEmail, mainPassword;
+//    bool loggedIn = false;
 //
-//        // Main game loop
-//        while (!WindowShouldClose())
+//    cout << "\t\t\t\t****************************************************" << endl;
+//    cout << "\t\t\t\t                      LOGIN                             " << endl;
+//    cout << "\t\t\t\t****************************************************" << endl;
+//    int mainUserID = 0;
+//    do {
+//        cout << "Enter Email: ";
+//        cin >> mainEmail;
+//        cout << "Enter Password: ";
+//        cin >> mainPassword;
+//
+//        loggedIn = false;
+//
+//        for (int i = 0; i < numAccounts; i++)
 //        {
-//            // Update
-//            userEmail = GetText("Enter Email:", userEmail, textFieldWidth);
-//            userPassword = GetText("Enter Password:", userPassword, textFieldWidth);
-//
-//            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+//            if (info[i]->getEmail() == mainEmail && info[i]->getPassword() == mainPassword)
 //            {
-//                int buttonX = (screenWidth - buttonWidth) / 2;
-//                int buttonY = screenHeight / 2 + 50;
-//
-//                // Check login button click
-//                if (CheckCollisionPointRec(GetMousePosition(), { buttonX, buttonY, buttonWidth, buttonHeight }))
-//                {
-//                    // Hardcoded login credentials (for demonstration purposes)
-//                    string correctEmail = "user@example.com";
-//                    string correctPassword = "password123";
-//
-//                    if (userEmail == correctEmail && userPassword == correctPassword)
-//                    {
-//                        loggedIn = true;
-//                        showLoginError = false;
-//                    }
-//                    else
-//                    {
-//                        loggedIn = false;
-//                        showLoginError = true;
-//                    }
-//                }
-//            }
-//
-//            // Draw
-//            BeginDrawing();
-//            ClearBackground(RAYWHITE);
-//
-//            if (!loggedIn)
-//            {
-//                DrawText("Login Form", screenWidth / 2 - 80, 50, 20, BLACK);
-//
-//                int emailFieldY = screenHeight / 2 - 50;
-//                DrawText("Email:", screenWidth / 2 - textFieldWidth / 2, emailFieldY - 30, 20, BLACK);
-//                DrawRectangle(screenWidth / 2 - textFieldWidth / 2, emailFieldY, textFieldWidth, textFieldHeight, LIGHTGRAY);
-//                DrawText(userEmail.c_str(), screenWidth / 2 - textFieldWidth / 2 + 5, emailFieldY + 10, 20, BLACK);
-//
-//                int passwordFieldY = emailFieldY + 70;
-//                DrawText("Password:", screenWidth / 2 - textFieldWidth / 2, passwordFieldY - 30, 20, BLACK);
-//                DrawRectangle(screenWidth / 2 - textFieldWidth / 2, passwordFieldY, textFieldWidth, textFieldHeight, LIGHTGRAY);
-//                DrawText(userPassword.c_str(), screenWidth / 2 - textFieldWidth / 2 + 5, passwordFieldY + 10, 20, BLACK);
-//
-//                int buttonX = (screenWidth - buttonWidth) / 2;
-//                int buttonY = screenHeight / 2 + 50;
-//                DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight, BLUE);
-//                DrawText("Login", buttonX + 20, buttonY + 10, 20, WHITE);
-//
-//                if (showLoginError)
-//                {
-//                    DrawText("Invalid credentials. Please try again.", screenWidth / 2 - 160, screenHeight / 2 + 100, 20, RED);
-//                }
-//            }
-//            else
-//            {
-//                DrawText("Logged in successfully!", screenWidth / 2 - 120, screenHeight / 2, 20, GREEN);
-//            }
-//            // Display posts
-//            for (int i = 0; i < numOfPosts; i++)
-//            {
-//                if (info2[i]->getuserPostID() == info[0]->getId()) // Assuming info[0] is the logged-in user
-//                {
-//                    DrawText(info2[i]->getcontentPost().c_str(), 100, 200 + i * 50, 20, BLACK);
-//                }
-//            }
-//
-//            // Check for new post creation
-//            if (IsKeyPressed(KEY_P))
-//            {
-//                // Create new post
-//                numOfPosts++;
-//
-//                string content = DrawTextInputBox(100, 500, 600, 30, "Enter new post content...");
-//
-//                info2[numOfPosts - 1] = new Posts;
-//                info2[numOfPosts - 1]->SetPostID(numOfPosts);
-//                int temp = 0;
-//                temp = info[0]->getId();
-//                info2[numOfPosts - 1]->SetuserPostID(temp); // Assuming info[0] is the logged-in user
-//                info2[numOfPosts - 1]->SetcontentPost(content);
-//                info2[numOfPosts - 1]->SetTimePost("3:30 PM");
+//                cout << endl;
+//                cout << "\t\t\t\t\t\tLogged in successfully!" << endl;
+//                cout << "\t\t\t\t****************************************************" << endl;
+//                cout << "\t\t\t\t\t\t   Welcome User " << endl;
+//                cout << "\t\t\t\t****************************************************" << endl;
+//                cout << "\t\t\t\t\t      **( " << info[i]->getFname() << " " << info[i]->getLname() << " )** " << endl;
+//                cout << endl;
+//                cout << endl;
+//                loggedIn = true;
+//                mainUserID = i;
+//                break;
 //            }
 //        }
 //
-//        // End drawing
-//        EndDrawing();
+//        if (!loggedIn) {
+//            cout << "Invalid credentials. Please try again." << endl;
+//        }
+//
+//    } while (!loggedIn);
+//    //////////////////////////////////////////////////////////////////////////////////////////////////
+//    bool logout = false;
+//    while (logout == false) // to continue asking user
+//    {
+//        int Commands = 0;
+//        cout << " PRESS to do the following things " << endl;
+//        cout << "1 -> PASSWORD CHANGE" << endl;
+//        cout << "2-> NAME CHANGE" << endl;
+//        cout << "3-> PROFILE PAGE" << endl;
+//        cout << "4-> HOME PAGE" << endl;
+//        cout << "5-> PAGES" << endl;
+//        cout << "6-> COMMENTS" << endl;
+//        cout << "7-> LOGOUT" << endl;
+//        cin >> Commands;
+//        bool Greater = false;
+//        while (Greater == false)
+//        {
+//            if (Commands <= 0 || Commands > 7)
+//            {
+//                cout << " Enter again :";
+//                cin >> Commands;
+//            }
+//            else if (Commands > 0 || Commands <= 7)
+//            {
+//                Greater = true;
+//            }
+//        }
+//        //////////////////////////////////////PASSWORD CHANGE/////////////////////////////////////////////
+//        if (Commands == 1)
+//        {
+//            string AgreePAScha;
+//            cout << "Do You want to change password if then Type [YES] else any other " << endl;
+//            cin >> AgreePAScha;
+//            if (AgreePAScha == "YES" || AgreePAScha == "yes")
+//            {
+//                string passwordchange;
+//                cout << "Enter new Password " << endl;
+//                cin >> passwordchange;
+//                cout << " Password Changed !!!!!!! " << endl;
+//                info[mainUserID]->setPassword(passwordchange);
+//            }
+//        }
+//        ////////////////////////////////////////NAME CHANGE/////////////////////////////////////////////
+//        if (Commands == 2)
+//        {
+//            string AgreeNAMEcha;
+//            cout << "Do You want to change USER NAME if then Type [YES] else any other " << endl;
+//            cin >> AgreeNAMEcha;
+//            if (AgreeNAMEcha == "YES" || AgreeNAMEcha == "yes")
+//            {
+//                string fNAMEchange;
+//                cout << "Enter new FIRST NAME " << endl;
+//                cin >> fNAMEchange;
+//                string lNAMEchange;
+//                cout << "Enter new LAST NAME " << endl;
+//                cin >> lNAMEchange;
+//                cout << " NAME Changed !!!!!!! " << endl;
+//                info[mainUserID]->setFname(fNAMEchange);
+//                info[mainUserID]->setLname(lNAMEchange);
+//            }
+//        }
+//        /////////////////////////////////////////// Profile Page ////////////////////////////////////////////////
+//        if (Commands == 3)
+//        {
+//            cout << endl << endl;
+//            cout << "\t\t\t\t****************************************************" << endl;
+//            cout << "\t\t\t\t\t\t    **(PROFILE PAGE)**" << endl;
+//            cout << "\t\t\t\t\t               " << info[mainUserID]->getFname() << " " << info[mainUserID]->getLname() << endl;
+//            cout << " PERSONAL DETAILS : " << endl;
+//            info1[mainUserID]->DisplayP(); // displaying personal details
+//            cout << endl << endl;
+//            for (int i = 0;i < numOfPosts;i++)
+//            {
+//                if (info2[i]->getuserPostID() == info[mainUserID]->getId())
+//                {
+//                    info2[i]->DisplayPosts();
+//                }
+//
+//            }
+//        }
+//        ////////////////////////////////////////////HOME PAGE ///////////////////////////////////////////////////
+//        if (Commands == 4)
+//        {
+//            string AgreeHome;
+//            cout << "Do you want to Visit HomePage? Type [YES] to visit, or any other key to cancel." << endl;
+//            cin >> AgreeHome;
+//            if (AgreeHome == "YES" || AgreeHome == "yes")
+//            {
+//                cout << "\t\t\t\t****************************************************" << endl;
+//                cout << "\t\t\t\t\t\t         HOME PAGE " << endl;
+//                for (int i = 0;i < numOfPosts;i++)
+//                {
+//                    for (int j = 0;j < numAccounts;j++)
+//                    {
+//                        if (info2[i]->getuserPostID() == info[j]->getId())
+//                        {
+//                            cout << "USER NAME : " << info[j]->getFname() << " " << info[j]->getLname() << endl;
+//                            info2[i]->DisplayPosts();
+//                            cout << "\t\t\t\t****************************************************" << endl;
+//                            cout << endl;
+//                        }
+//                    }
+//                }
+//            }
+//            // create new post
+//            string AgreePost;
+//            cout << "Do you want to post? Type [YES] to post, or any other key to cancel." << endl;
+//            cin >> AgreePost;
+//
+//            if (AgreePost == "YES" || AgreePost == "yes")
+//            {
+//                // Increase the number of posts
+//                numOfPosts += 1;
+//
+//                // Create a new array to hold the updated posts
+//                Posts** newInfo2 = new Posts * [numOfPosts];
+//
+//                // Copy existing posts to the new array
+//                for (int i = 0; i < numOfPosts - 1; i++)
+//                {
+//                    newInfo2[i] = info2[i];
+//                }
+//
+//                // Allocate memory for the new post
+//                newInfo2[numOfPosts - 1] = new Posts;
+//
+//                // Set properties of the new post
+//                newInfo2[numOfPosts - 1]->SetPostID(numOfPosts);
+//                int temp = info[mainUserID]->getId();
+//                newInfo2[numOfPosts - 1]->SetuserPostID(temp);
+//
+//                string content;
+//                cout << "Enter content: ";
+//                cin.ignore();
+//                getline(cin, content);
+//                newInfo2[numOfPosts - 1]->SetcontentPost(content);
+//                newInfo2[numOfPosts - 1]->SetTimePost("3:30 PM");
+//
+//                // Free the memory of the old info2 array (including posts)
+//                delete[] info2;
+//
+//                // Point info2 to the new array
+//                info2 = newInfo2;
+//            }
+//        }
+//        //////////////////////////////////////////// PAGES //////////////////////////////////////////////////////
+//        if (Commands == 5) {
+//            string showPage;
+//            cout << "\t\t\t\t****************************************************" << endl;
+//            cout << endl;
+//            cout << endl;
+//            cout << "Do you want to Visit PAGES? Type [YES] to visit, or any other key to cancel." << endl;
+//            cin >> showPage;
+//            if (showPage == "YES" || showPage == "yes")
+//            { // problem in main pages loop error
+//                bool pagefound = false;
+//                int mainPageID = 0;
+//                cout << "\t\t\t\t****************************************************" << endl;
+//                for (int i = 0;i < numPages;i++)
+//                {
+//                    if (info[mainUserID]->getId() == info3[i]->getUserPageID1() || info[mainUserID]->getId() == info3[i]->getUserPageID2() || info[mainUserID]->getId() == info3[i]->getUserPageID3())
+//                    {
+//                        mainPageID = i;
+//                        cout << "\t\t\t\t\t\t     PAGE ID : " << info3[i]->getpageID() << endl << endl;
+//                        cout << "\t\t\t\t\t\t      PAGE NAME " << endl;
+//                        cout << "\t\t\t\t\t\t   *|(" << info3[i]->getPageName() << ")|*" << endl << endl;
+//                        cout << "LIKES ON PAGE <{ " << info3[i]->getpagefollowers() << " }>" << endl;
+//                        cout << " Location : " << info3[i]->getPagelocation() << endl;
+//                        cout << "Page Description is :" << endl;
+//                        cout << info3[i]->getPagedescription() << endl;
+//                        cout << "{(Followers)} " << endl << endl;;
+//                        for (int j = 0;j < numAccounts;j++)
+//                        {
+//                            if (info[j]->getId() == info3[i]->getUserPageID1() || info[j]->getId() == info3[i]->getUserPageID2() || info[j]->getId() == info3[i]->getUserPageID3())
+//                            {
+//                                cout << info[j]->getFname() << " " << info[j]->getLname() << endl;
+//                            }
+//                        }
+//                        cout << endl << endl;
+//                        pagefound = true;
+//                    }
+//                }
+//                if (pagefound == false)
+//                {
+//                    cout << " USER " << info[mainUserID]->getFname() << " " << info[mainUserID]->getLname() << " doesnot follow any page " << endl;
+//                }
+//                for (int i = 0;i < numOfPosts;i++)
+//                {
+//
+//                    if (info3[mainPageID]->getpostPageID1() == info2[i]->getPostID() || info3[mainPageID]->getpostPageID2() == info2[i]->getPostID() || info3[mainPageID]->getpostPageID3() == info2[i]->getPostID())
+//                    {
+//                        info2[i]->DisplayPosts();
+//                    }
+//                }
+//            }
+//        }
+//        ////////////////////////////////////////COMMENTS//////////////////////////////////////////////////////
+//        if (Commands == 6) {
+//            string AgreeComments;
+//            cout << "Do you want to watch Comments on Posts ? Type [YES] to visit, or any other key to cancel." << endl;
+//            cin >> AgreeComments;
+//            if (AgreeComments == "YES" || AgreeComments == "yes")
+//            {
+//                int i = 0;
+//                cout << "Enter the ID of post you want to see Comments from 1 to " << numOfPosts << endl;
+//                cin >> i;
+//                bool postid = false;
+//                while (postid == false)
+//                {
+//                    if (i <= 0 || i > numOfPosts)
+//                    {
+//                        cout << " Invalid Post ID! Enter again " << endl;
+//                        cin >> i;
+//                    }
+//                    else if (i > 0 || i < numOfPosts)
+//                    {
+//                        postid = true;
+//                    }
+//                }
+//                if (i > 0 || i < numOfPosts)
+//                {
+//                    for (int j = 0;j < numAccounts;j++)
+//                    {
+//                        if (info[j]->getId() == info2[i - 1]->getuserPostID())
+//                        {
+//                            cout << info[j]->getFname() << " " << info[j]->getLname() << endl;
+//                        }
+//                    }
+//                    info2[i - 1]->DisplayPosts();
+//                    cout << " ((((COMMENTS))))" << endl;
+//                    for (int j = 0;j < numComments;j++)
+//                    {
+//                        if (info4[j]->getCommentPostID() == info2[i - 1]->getPostID())
+//                        {
+//                            for (int k = 0;k < numAccounts;k++)
+//                            {
+//                                if (info4[j]->getCommentUserID() == info[k]->getId())
+//                                {
+//                                    cout << info[k]->getFname() << " " << info[k]->getLname() << endl;
+//                                    info4[j]->DisplayComments();
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            string Agreecomment_Add;
+//        }
+//        if (Commands == 7)
+//        {
+//            cout << "LOGGING OUT " << endl;
+//            logout == true;
+//            break;
+//        }
+//
+//
+//
+//
+//
+//
+//    
+//
+//    //////////////////////////////////////////// OUTPUT DATA ////////////////////////////////////////////////
+//    //changing password
+//    ofstream outputFile("email.txt");
+//    if (!outputFile.is_open())
+//    {
+//        cout << "Error opening output file!(email.txt)" << endl;
+//        return 1;
 //    }
 //
-//    // Clean up resources
 //    for (int i = 0; i < numAccounts; i++)
 //    {
-//        delete info[i];
-//        delete info1[i];
+//        info[i]->outputFileU(outputFile);
+//    }
+//    outputFile.close();
+//    //making posts
+//    ofstream outputFile1("Posts.txt");
+//    if (!outputFile1.is_open())
+//    {
+//        cout << "Error opening output file (posts.txt)!" << endl;
+//        return 1;
 //    }
 //
+//    for (int i = 0; i < numOfPosts; i++)
+//    {
+//        info2[i]->outputfilePost(outputFile1);
+//    }
+//    outputFile.close();
+//    // storing size of posts
+//    ofstream outputFilePosts("Size.txt");
+//    if (!outputFilePosts.is_open())
+//    {
+//        cout << "Error opening output file (size.txt)!" << endl;
+//        return 1;
+//    }
+//    else
+//    {
+//        outputFilePosts << numOfPosts << " ";
+//    }
+//    } //while loop end
+//    ///////////////////////////////////////////// CLEAN UP ////////////////////////////////////////////////
+//
+//    for (int i = 0; i < numAccounts; i++)
+//    {
+//        delete info[i];  // email.txt
+//        delete info1[i]; // profilepage.txt
+//    }
+//    for (int i = 0; i < numPages; i++)
+//    {
+//        delete info3[i];  // pages.txt
+//
+//    }
+//    // posts.txt de allocation
 //    for (int i = 0; i < numOfPosts; i++)
 //    {
 //        delete info2[i];
 //    }
 //    delete[] info2;
+//    info2 = nullptr;
+//    // comments.txt
+//    for (int i = 0; i < numComments; i++)
+//    {
+//        delete info4[i];  // comments.txt
+//    }
 //
-//    CloseWindow();
+//
+//
 //
 //    return 0;
 //}

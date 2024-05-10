@@ -12,7 +12,7 @@
 #include "Comments.h"
 using namespace std;
 
-//void RunApp();
+void RunApp();
 
 
 

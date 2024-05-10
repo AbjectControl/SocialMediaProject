@@ -27,6 +27,13 @@ void Comments::readfileComments(ifstream& file)
 	}
 	getline(file, CommentContent);
 }
+void Comments::outputfilecomments(ofstream& file)
+{
+	file << CommentID << endl;
+	file << CommentPostID << endl;
+	file << CommentUserID << endl;
+	file << CommentContent << endl;
+}
 void Comments::DisplayComments()
 {
 	cout << "COMMENT ID : " << CommentID << endl;
