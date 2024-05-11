@@ -107,10 +107,10 @@ we are in class
 TXT size file doidnt change
 3:30 PM
 28
-102
-it worked 
+107
+laying 
 3:30 PM
 29
-102
-now I have also done in function
+100
+looking like it works
 3:30 PM

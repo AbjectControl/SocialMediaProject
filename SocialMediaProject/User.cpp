@@ -29,6 +29,11 @@ void User::DisplayU()
     cout << "Email: " << email << endl;
     cout << "Password: " << password << endl;
 }
+void User::DisplayUser()
+{
+    cout << Fname << " " << Lname <<  endl;
+    //cout << "Account ID " << Id << endl << endl;
+}
 //SETTERS
 void User::setEmail(const string& e)
 {

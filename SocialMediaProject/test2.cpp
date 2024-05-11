@@ -84,14 +84,15 @@
 //    }
 //    infilePages.close();
 //    // comments
-//    const int numComments = 5;
+//    int numComments;
+//    infilePosts >> numComments;
 //    ifstream infileComments("Comments.txt");
 //    if (!infileComments.is_open())
 //    {
 //        cout << "Error opening file (Comments.txt)!" << endl;
 //        return 1;
 //    }
-//    Comments* info4[numComments];
+//    Comments** info4=new Comments*[numComments];
 //    for (int i = 0; i < numComments; i++)
 //    {
 //        info4[i] = new Comments;
@@ -101,7 +102,7 @@
 //
 //
 //    ////////////////////////////////////// BOOT PAGE ////////////////////////////////////////////
-//    cout << "\t\t\t\t\t\t   WELCOME USER " << endl;
+//    cout << "\t\t\t\t\t        FAST SOCIAL MEDIA APP " << endl;
 //    for (int i = 0;i < 1000000000;i++);
 //
 //    /////////////////////////////////////////////////LOGIN PAGE////////////////////////////////////////////
@@ -143,7 +144,10 @@
 //        }
 //
 //    } while (!loggedIn);
+//    system("cls");
 //    //////////////////////////////////////////////////////////////////////////////////////////////////
+//    cout << "\t\t\t\t\t        FAST SOCIAL MEDIA APP " << endl;
+//
 //    bool logout = false;
 //    while (logout == false) // to continue asking user
 //    {
@@ -173,6 +177,7 @@
 //        //////////////////////////////////////PASSWORD CHANGE/////////////////////////////////////////////
 //        if (Commands == 1)
 //        {
+//            system("cls");
 //            string AgreePAScha;
 //            cout << "Do You want to change password if then Type [YES] else any other " << endl;
 //            cin >> AgreePAScha;
@@ -390,6 +395,70 @@
 //                }
 //            }
 //            string Agreecomment_Add;
+//            cout << "Do you want to do Comments on Posts ? Type [YES] to visit, or any other key to cancel." << endl;
+//            cin >> Agreecomment_Add;
+//            if (Agreecomment_Add == "YES" || Agreecomment_Add == "yes")
+//            {
+//                // Increase the number of comments
+//                numComments += 1;
+//
+//                // Create a new array to hold the updated comments
+//                Comments** newInfo4 = new Comments * [numComments];
+//
+//                // Copy existing comments to the new array
+//                for (int i = 0; i < numComments - 1; i++)
+//                {
+//                    newInfo4[i] = info4[i];
+//                }
+//
+//                // Allocate memory for the new comment
+//                newInfo4[numComments - 1] = new Comments;
+//                // to get post ID
+//                int pID;
+//                cout << "Enter the ID of post you want to enter from (1 to " << numOfPosts << " )" << endl;
+//                cin >> pID;
+//                bool postcommentid = false;
+//                while (postcommentid == false)
+//                {
+//                    if (pID <= 0 || pID > numOfPosts)
+//                    {
+//                        cout << " Invalid Post ID! Enter again " << endl;
+//                        cin >> pID;
+//                    }
+//                    else if (pID > 0 || pID < numOfPosts)
+//                    {
+//                        postcommentid = true;
+//                    }
+//                }
+//                int CommentonPost = info2[pID - 1]->getPostID();
+//
+//                // Set properties of the new comment
+//                newInfo4[numComments - 1]->setCommentID(numComments);
+//                newInfo4[numComments - 1]->setCommentPostID(CommentonPost);
+//                int tempcomments = info[mainUserID]->getId();
+//                newInfo4[numComments - 1]->setCommentUserID(tempcomments);
+//
+//                string contentc;
+//                cout << "Enter content: ";
+//                cin.ignore();
+//                getline(cin, contentc);
+//                newInfo4[numComments - 1]->setCommentContent(contentc);
+//
+//                // Free the memory of the old info4 array (including comments)
+//                delete[] info4;
+//
+//                // Point info4 to the new array
+//                info4 = newInfo4;
+//            }
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //        }
 //        if (Commands == 7)
 //        {
@@ -403,46 +472,60 @@
 //
 //
 //
-//    
 //
-//    //////////////////////////////////////////// OUTPUT DATA ////////////////////////////////////////////////
-//    //changing password
-//    ofstream outputFile("email.txt");
-//    if (!outputFile.is_open())
-//    {
-//        cout << "Error opening output file!(email.txt)" << endl;
-//        return 1;
-//    }
 //
-//    for (int i = 0; i < numAccounts; i++)
-//    {
-//        info[i]->outputFileU(outputFile);
-//    }
-//    outputFile.close();
-//    //making posts
-//    ofstream outputFile1("Posts.txt");
-//    if (!outputFile1.is_open())
-//    {
-//        cout << "Error opening output file (posts.txt)!" << endl;
-//        return 1;
-//    }
+//        //////////////////////////////////////////// OUTPUT DATA ////////////////////////////////////////////////
+//        //changing password
+//        ofstream outputFile("email.txt");
+//        if (!outputFile.is_open())
+//        {
+//            cout << "Error opening output file!(email.txt)" << endl;
+//            return 1;
+//        }
 //
-//    for (int i = 0; i < numOfPosts; i++)
-//    {
-//        info2[i]->outputfilePost(outputFile1);
-//    }
-//    outputFile.close();
-//    // storing size of posts
-//    ofstream outputFilePosts("Size.txt");
-//    if (!outputFilePosts.is_open())
-//    {
-//        cout << "Error opening output file (size.txt)!" << endl;
-//        return 1;
-//    }
-//    else
-//    {
-//        outputFilePosts << numOfPosts << " ";
-//    }
+//        for (int i = 0; i < numAccounts; i++)
+//        {
+//            info[i]->outputFileU(outputFile);
+//        }
+//        outputFile.close();
+//        //making posts
+//        ofstream outputFile1("Posts.txt");
+//        if (!outputFile1.is_open())
+//        {
+//            cout << "Error opening output file (posts.txt)!" << endl;
+//            return 1;
+//        }
+//
+//        for (int i = 0; i < numOfPosts; i++)
+//        {
+//            info2[i]->outputfilePost(outputFile1);
+//        }
+//        outputFile1.close();
+//        // making comments
+//        ofstream outputFile2("Comments.txt");
+//        if (!outputFile2.is_open())
+//        {
+//            cout << "Error opening output file (Comments.txt)!" << endl;
+//            return 1;
+//        }
+//
+//        for (int i = 0; i < numComments; i++)
+//        {
+//            info4[i]->outputfilecomments(outputFile2);
+//        }
+//        outputFile2.close();
+//        // storing size of posts and comments
+//        ofstream outputFilePosts("Size.txt");
+//        if (!outputFilePosts.is_open())
+//        {
+//            cout << "Error opening output file (size.txt)!" << endl;
+//            return 1;
+//        }
+//        else
+//        {
+//            outputFilePosts << numOfPosts << " "<<numComments<<" ";
+//        }
+//
 //    } //while loop end
 //    ///////////////////////////////////////////// CLEAN UP ////////////////////////////////////////////////
 //

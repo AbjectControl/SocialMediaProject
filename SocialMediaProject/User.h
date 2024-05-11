@@ -20,7 +20,7 @@ public:
     void readfileU(ifstream& file);
     void outputFileU(ofstream& file);
     void DisplayU();
-
+    void DisplayUser();
     // Setters
     void setEmail(const string& e);
     void setPassword(const string& p);

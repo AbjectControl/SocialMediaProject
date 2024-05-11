@@ -131,7 +131,7 @@ void RunApp()
                 cout << "\t\t\t\t****************************************************" << endl;
                 cout << "\t\t\t\t\t\t   Welcome User " << endl;
                 cout << "\t\t\t\t****************************************************" << endl;
-                cout << "\t\t\t\t\t      **( " << info[i]->getFname() << " " << info[i]->getLname() << " )** " << endl;
+                cout << "\t\t\t\t\t          **( " << info[i]->getFname() << " " << info[i]->getLname() << " )** " << endl;
                 cout << endl;
                 cout << endl;
                 loggedIn = true;
@@ -145,13 +145,21 @@ void RunApp()
         }
 
     } while (!loggedIn);
-    system("cls");
+    
     //////////////////////////////////////////////////////////////////////////////////////////////////
-    cout << "\t\t\t\t\t        FAST SOCIAL MEDIA APP " << endl;
-
+    for (int i = 0;i < 1000000000;i++);
+    system("cls");
     bool logout = false;
     while (logout == false) // to continue asking user
     {
+       
+        cout << "\t\t\t\t****************************************************" << endl;
+        cout << "\t\t\t\t\t        FAST SOCIAL MEDIA APP " << endl;
+        cout << "\t\t\t\t****************************************************" << endl;
+        cout << "\t\t\t\t****************************************************" << endl;
+        cout << "\t\t\t\t\t          **( " << info[mainUserID]->getFname() << " " << info[mainUserID]->getLname() << " )** " << endl;
+        cout << endl;
+        cout << endl;
         int Commands = 0;
         cout << " PRESS to do the following things " << endl;
         cout << "1 -> PASSWORD CHANGE" << endl;
@@ -160,17 +168,18 @@ void RunApp()
         cout << "4-> HOME PAGE" << endl;
         cout << "5-> PAGES" << endl;
         cout << "6-> COMMENTS" << endl;
-        cout << "7-> LOGOUT" << endl;
+        cout << "7-> ADD friend " << endl;
+        cout << "8-> LOGOUT" << endl;
         cin >> Commands;
         bool Greater = false;
         while (Greater == false)
         {
-            if (Commands <= 0 || Commands > 7)
+            if (Commands <= 0 || Commands > 8)
             {
                 cout << " Enter again :";
                 cin >> Commands;
             }
-            else if (Commands > 0 || Commands <= 7)
+            else if (Commands > 0 || Commands <= 8)
             {
                 Greater = true;
             }
@@ -194,6 +203,7 @@ void RunApp()
         ////////////////////////////////////////NAME CHANGE/////////////////////////////////////////////
         if (Commands == 2)
         {
+            system("cls");
             string AgreeNAMEcha;
             cout << "Do You want to change USER NAME if then Type [YES] else any other " << endl;
             cin >> AgreeNAMEcha;
@@ -213,6 +223,7 @@ void RunApp()
         /////////////////////////////////////////// Profile Page ////////////////////////////////////////////////
         if (Commands == 3)
         {
+            system("cls");
             cout << endl << endl;
             cout << "\t\t\t\t****************************************************" << endl;
             cout << "\t\t\t\t\t\t    **(PROFILE PAGE)**" << endl;
@@ -232,6 +243,7 @@ void RunApp()
         ////////////////////////////////////////////HOME PAGE ///////////////////////////////////////////////////
         if (Commands == 4)
         {
+            system("cls");
             string AgreeHome;
             cout << "Do you want to Visit HomePage? Type [YES] to visit, or any other key to cancel." << endl;
             cin >> AgreeHome;
@@ -247,55 +259,99 @@ void RunApp()
                         {
                             cout << "USER NAME : " << info[j]->getFname() << " " << info[j]->getLname() << endl;
                             info2[i]->DisplayPosts();
+                            cout << "ID to delete Post and Comment ((" << i + 1 << "))" << endl;
                             cout << "\t\t\t\t****************************************************" << endl;
                             cout << endl;
                         }
                     }
                 }
             }
-            // create new post
-            string AgreePost;
-            cout << "Do you want to post? Type [YES] to post, or any other key to cancel." << endl;
-            cin >> AgreePost;
-
-            if (AgreePost == "YES" || AgreePost == "yes")
+            // delete post
+            string AgreeDelPost;
+            cout << " Do you want to delete post " << endl;
+            cin >> AgreeDelPost;
+            if (AgreeDelPost == "YES" || AgreeDelPost == "yes")
             {
-                // Increase the number of posts
-                numOfPosts += 1;
-
-                // Create a new array to hold the updated posts
-                Posts** newInfo2 = new Posts * [numOfPosts];
-
-                // Copy existing posts to the new array
-                for (int i = 0; i < numOfPosts - 1; i++)
+                int pdelID;
+                cout << "Enter the ID of post you want to enter from (1 to " << numOfPosts << " )" << endl;
+                cin >> pdelID;
+                bool postdelid = false;
+                while (postdelid == false)
                 {
-                    newInfo2[i] = info2[i];
+                    if (pdelID <= 0 || pdelID > numOfPosts)
+                    {
+                        cout << " Invalid Post ID! Enter again " << endl;
+                        cin >> pdelID;
+                    }
+                    else if (pdelID > 0 || pdelID < numOfPosts)
+                    {
+                        postdelid = true;
+                    }
                 }
+                if (pdelID > 0 || pdelID < numOfPosts)
+                {
+                    int postIndexToDelete = pdelID - 1;
 
-                // Allocate memory for the new post
-                newInfo2[numOfPosts - 1] = new Posts;
+                    // Swap the post to be deleted with the last post in the array
+                    if (postIndexToDelete != numOfPosts - 1)
+                    {
+                        // Move the last post to the position of the post to be deleted
+                        swap(info2[postIndexToDelete], info2[numOfPosts - 1]);
+                    }
 
-                // Set properties of the new post
-                newInfo2[numOfPosts - 1]->SetPostID(numOfPosts);
-                int temp = info[mainUserID]->getId();
-                newInfo2[numOfPosts - 1]->SetuserPostID(temp);
+                    // Delete the post at the end
+                    delete info2[numOfPosts - 1];
+                    numOfPosts--; // Decrease the count of posts
 
-                string content;
-                cout << "Enter content: ";
-                cin.ignore();
-                getline(cin, content);
-                newInfo2[numOfPosts - 1]->SetcontentPost(content);
-                newInfo2[numOfPosts - 1]->SetTimePost("3:30 PM");
+                    cout << "Post with ID " << pdelID << " has been successfully deleted." << endl;
+                }
+                // create new post
+                string AgreePost;
+                cout << "Do you want to post? Type [YES] to post, or any other key to cancel." << endl;
+                cin >> AgreePost;
 
-                // Free the memory of the old info2 array (including posts)
-                delete[] info2;
+                if (AgreePost == "YES" || AgreePost == "yes")
+                {
+                    // Increase the number of posts
+                    numOfPosts += 1;
 
-                // Point info2 to the new array
-                info2 = newInfo2;
+                    // Create a new array to hold the updated posts
+                    Posts** newInfo2 = new Posts * [numOfPosts];
+
+                    // Copy existing posts to the new array
+                    for (int i = 0; i < numOfPosts - 1; i++)
+                    {
+                        newInfo2[i] = info2[i];
+                    }
+
+                    // Allocate memory for the new post
+                    newInfo2[numOfPosts - 1] = new Posts;
+
+                    // Set properties of the new post
+                    int postidplus = numOfPosts + 1;
+                    newInfo2[numOfPosts - 1]->SetPostID(postidplus);
+                    int temp = info[mainUserID]->getId();
+                    newInfo2[numOfPosts - 1]->SetuserPostID(temp);
+
+                    string content;
+                    cout << "Enter content: ";
+                    cin.ignore();
+                    getline(cin, content);
+                    newInfo2[numOfPosts - 1]->SetcontentPost(content);
+                    newInfo2[numOfPosts - 1]->SetTimePost("3:30 PM");
+
+                    // Free the memory of the old info2 array (including posts)
+                    delete[] info2;
+
+                    // Point info2 to the new array
+                    info2 = newInfo2;
+                }
             }
         }
         //////////////////////////////////////////// PAGES //////////////////////////////////////////////////////
-        if (Commands == 5) {
+        if (Commands == 5) 
+        {
+            system("cls");
             string showPage;
             cout << "\t\t\t\t****************************************************" << endl;
             cout << endl;
@@ -346,7 +402,9 @@ void RunApp()
             }
         }
         ////////////////////////////////////////COMMENTS//////////////////////////////////////////////////////
-        if (Commands == 6) {
+        if (Commands == 6) 
+        {
+            system("cls");
             string AgreeComments;
             cout << "Do you want to watch Comments on Posts ? Type [YES] to visit, or any other key to cancel." << endl;
             cin >> AgreeComments;
@@ -416,17 +474,17 @@ void RunApp()
                 newInfo4[numComments - 1] = new Comments;
                 // to get post ID
                 int pID;
-                cout << "Enter the ID of post you want to enter from (1 to " << numOfPosts << " )" << endl;
+                cout << "Enter the ID of post you want to enter from (1 to " << numOfPosts+1 << " )" << endl;
                 cin >> pID;
                 bool postcommentid = false;
                 while (postcommentid == false)
                 {
-                    if (pID <= 0 || pID > numOfPosts)
+                    if (pID <= 0 || pID > numOfPosts+1)
                     {
                         cout << " Invalid Post ID! Enter again " << endl;
                         cin >> pID;
                     }
-                    else if (pID > 0 || pID < numOfPosts)
+                    else if (pID > 0 || pID < numOfPosts+1)
                     {
                         postcommentid = true;
                     }
@@ -451,23 +509,34 @@ void RunApp()
                 // Point info4 to the new array
                 info4 = newInfo4;
             }
-
-
-
-
-
-
-
-
-
         }
-        if (Commands == 7)
+        
+        if (Commands == 8)
         {
-            cout << "LOGGING OUT " << endl;
+            cout << "\t\t\t\t****************************************************" << endl;
+            cout << "\t\t\t\t\t\t       LOGGING OUT " << endl;
+            cout << "\t\t\t\t****************************************************" << endl;
+
             logout == true;
             break;
         }
-
+        if (Commands == 7)
+        {
+            system("cls");
+            string AgreeAddfriend;
+            cout << "Do you want to Add friends? Type [YES] to visit, or any other key to cancel." << endl;
+            cin >> AgreeAddfriend;
+            if (AgreeAddfriend == "YES" || AgreeAddfriend == "yes")
+            {
+                for (int i = 0;i < numAccounts;i++)
+                {
+                    if (info[mainUserID]->getId() != info[i]->getId())
+                    {
+                        info[i]->DisplayUser();
+                    }
+                }
+            }
+        }
 
         
 
