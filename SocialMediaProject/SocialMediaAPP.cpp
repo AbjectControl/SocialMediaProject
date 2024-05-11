@@ -7,6 +7,7 @@
 #include "Pages.h"
 #include "Comments.h"
 #include "SocialApp.h"
+#include "FriendList.h"
 using namespace std;
 
 void RunApp()
@@ -100,7 +101,20 @@ void RunApp()
         info4[i]->readfileComments(infileComments);
     }
     infileComments.close();
-
+    // friedlist
+    ifstream infileFlist("FriendList.txt");
+    if (!infileFlist.is_open())
+    {
+        cerr << "Error opening file (FriendList.txt)!" << endl;
+        exit(1);
+    }
+    FriendList*info5 [numAccounts];
+    for (int i = 0;i < numAccounts;i++)
+    {
+        info5[i] = new FriendList;
+        info5[i]->readfileFL(infileFlist);
+    }
+    infileFlist.close();
 
     ////////////////////////////////////// BOOT PAGE ////////////////////////////////////////////
     cout << "\t\t\t\t\t        FAST SOCIAL MEDIA APP " << endl;
@@ -523,19 +537,68 @@ void RunApp()
         if (Commands == 7)
         {
             system("cls");
-            string AgreeAddfriend;
-            cout << "Do you want to Add friends? Type [YES] to visit, or any other key to cancel." << endl;
-            cin >> AgreeAddfriend;
-            if (AgreeAddfriend == "YES" || AgreeAddfriend == "yes")
+            string AgreeList;
+            cout << "Do you want to view FriendList ? Type [YES] to visit, or any other key to cancel." << endl;
+            cin >> AgreeList;
+            if (AgreeList == "YES" || AgreeList == "yes")
             {
+                int FLuserID = 0;
                 for (int i = 0;i < numAccounts;i++)
                 {
-                    if (info[mainUserID]->getId() != info[i]->getId())
+                    if (info[mainUserID]->getId() == info5[i]->getuserId())
                     {
-                        info[i]->DisplayUser();
+                        FLuserID = i;
+                        break;
                     }
                 }
+                int F1 = info5[FLuserID]->getfrienduserId1();
+                int F2 = info5[FLuserID]->getfrienduserId2();
+                int F3 = info5[FLuserID]->getfrienduserId3();
+                for (int i = 0;i < numAccounts;i++)
+                {
+                    if (info[i]->getId() == F1 || info[i]->getId() == F2 || info[i]->getId() == F3)
+                    {
+                        cout << info[i]->getFname() << " " << info[i]->getLname() << endl;
+                        cout << info[i]->getId() << endl << endl;
+                    }
+                }
+
+                string AgreeListPP;
+                cout << "Do you want to view Pofile of Friend ? Type [YES] to visit, or any other key to cancel." << endl;
+                cin >> AgreeListPP;
+                if (AgreeListPP == "YES" || AgreeListPP == "yes")
+                {
+                    int getID;
+                    cout << "Enter the ID of the friend you want to visit: " << endl;
+                    cin >> getID;
+
+                    bool IDfound = false;
+                    while (!IDfound)
+                    {
+                        if (getID == F1 || getID == F2 || getID == F3)
+                        {
+                            IDfound = true; // ID is valid, exit the loop
+                        }
+                        else
+                        {
+                            cout << "Invalid ID. Please enter a valid friend ID: ";
+                            cin >> getID;
+                        }
+                    }
+                    for (int i = 0;i < numAccounts;i++)
+                    {
+                        if (info[i]->getId() == getID)
+                        {
+                            info1[i]->DisplayP();
+                        }
+
+                    }
+                    
+                }
             }
+           
+                    
+            
         }
 
         
@@ -603,6 +666,7 @@ void RunApp()
     {
         delete info[i];  // email.txt
         delete info1[i]; // profilepage.txt
+        delete info5[i]; // friendlist
     }
     for (int i = 0; i < numPages; i++)
     {
@@ -621,7 +685,8 @@ void RunApp()
     {
         delete info4[i];  // comments.txt
     }
-
+    
+    
 
 
 

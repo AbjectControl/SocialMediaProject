@@ -7,6 +7,7 @@
 #include "Pages.h"
 #include "Comments.h"
 #include "SocialApp.h"
+#include "FriendList.h"
 using namespace std;
 
 int main()

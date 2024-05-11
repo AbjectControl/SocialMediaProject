@@ -32,7 +32,7 @@ void User::DisplayU()
 void User::DisplayUser()
 {
     cout << Fname << " " << Lname <<  endl;
-    //cout << "Account ID " << Id << endl << endl;
+    cout << "Account ID " << Id << endl << endl;
 }
 //SETTERS
 void User::setEmail(const string& e)

@@ -42,6 +42,9 @@
     <ClCompile Include="SocialMediaAPP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FriendList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="email.txt" />
@@ -50,6 +53,7 @@
     <Text Include="Size.txt" />
     <Text Include="Pages.txt" />
     <Text Include="Comments.txt" />
+    <Text Include="FriendList.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User.h">
@@ -68,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SocialApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FriendList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
