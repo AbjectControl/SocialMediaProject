@@ -123,7 +123,7 @@ void RunApp()
         postLikes[i] = new Likes(info2[i]->getPostID());
     }
 
-
+    system("color 7c");
 
     ////////////////////////////////////// BOOT PAGE ////////////////////////////////////////////
     cout << "\t\t\t\t\t        FAST SOCIAL MEDIA APP " << endl;
@@ -149,6 +149,7 @@ void RunApp()
         {
             if (info[i]->getEmail() == mainEmail && info[i]->getPassword() == mainPassword)
             {
+                system("color 7a");
                 cout << endl;
                 cout << "\t\t\t\t\t\tLogged in successfully!" << endl;
                 cout << "\t\t\t\t****************************************************" << endl;
@@ -172,10 +173,11 @@ void RunApp()
     //////////////////////////////////////////////////////////////////////////////////////////////////
     for (int i = 0;i < 1000000000;i++);
     system("cls");
+    
     bool logout = false;
     while (logout == false) // to continue asking user
     {
-
+        system("color 7d");
         cout << "\t\t\t\t****************************************************" << endl;
         cout << "\t\t\t\t\t        FAST SOCIAL MEDIA APP " << endl;
         cout << "\t\t\t\t****************************************************" << endl;
@@ -199,6 +201,7 @@ void RunApp()
         bool Greater = false;
         while (Greater == false)
         {
+            system("color 70");
             if (Commands <= 0 || Commands > 10)
             {
                 cout << " Enter again :";
@@ -212,6 +215,7 @@ void RunApp()
         //////////////////////////////////////PASSWORD CHANGE/////////////////////////////////////////////
         if (Commands == 1)
         {
+            system("color 90");
             system("cls");
             string AgreePAScha;
             cout << "Do You want to change password if then Type [YES] else any other " << endl;
@@ -228,6 +232,7 @@ void RunApp()
         ////////////////////////////////////////NAME CHANGE/////////////////////////////////////////////
         if (Commands == 2)
         {
+            system("color 20");
             system("cls");
             string AgreeNAMEcha;
             cout << "Do You want to change USER NAME if then Type [YES] else any other " << endl;
@@ -248,6 +253,7 @@ void RunApp()
         /////////////////////////////////////////// Profile Page ////////////////////////////////////////////////
         if (Commands == 3)
         {
+            system("color 30");
             system("cls");
             cout << endl << endl;
             cout << "\t\t\t\t****************************************************" << endl;
