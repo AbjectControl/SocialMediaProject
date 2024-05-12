@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Comments.cpp" />
     <ClCompile Include="FriendList.cpp" />
+    <ClCompile Include="Likes.cpp" />
     <ClCompile Include="Pages.cpp" />
     <ClCompile Include="Posts.cpp" />
     <ClCompile Include="ProfilePage.cpp" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="Comments.h" />
     <ClInclude Include="FriendList.h" />
+    <ClInclude Include="Likes.h" />
     <ClInclude Include="Pages.h" />
     <ClInclude Include="Posts.h" />
     <ClInclude Include="ProfilePage.h" />

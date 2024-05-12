@@ -45,6 +45,9 @@
     <ClCompile Include="FriendList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Likes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="email.txt" />
@@ -75,6 +78,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FriendList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Likes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

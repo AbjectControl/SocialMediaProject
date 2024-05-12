@@ -1,4 +1,4 @@
-#include <iostream>
+//#include <iostream>
 #include <fstream>
 #include <string>
 #include "User.h"
@@ -8,6 +8,7 @@
 #include "Comments.h"
 #include "SocialApp.h"
 #include "FriendList.h"
+#include "Likes.h"
 using namespace std;
 
 void RunApp()
@@ -20,7 +21,7 @@ void RunApp()
     if (!infile.is_open())
     {
         cerr << "Error opening file (email.txt)!" << endl;
-        exit(1) ;
+        exit(1);
     }
 
     User* info[numAccounts];
@@ -36,7 +37,7 @@ void RunApp()
     if (!infile1.is_open())
     {
         cerr << "Error opening file (Profile.txt)!" << endl;
-        exit(1) ;
+        exit(1);
     }
 
     ProfilePage* info1[numAccounts];
@@ -51,7 +52,7 @@ void RunApp()
     if (!infile2.is_open())
     {
         cerr << "Error opening file (Posts.txt)!" << endl;
-        exit(1) ;
+        exit(1);
     }
     ifstream infilePosts("Size.txt"); // this is due to storing size for next restart and make new posts
     if (!infilePosts.is_open())
@@ -108,13 +109,21 @@ void RunApp()
         cerr << "Error opening file (FriendList.txt)!" << endl;
         exit(1);
     }
-    FriendList*info5 [numAccounts];
+    FriendList* info5[numAccounts];
     for (int i = 0;i < numAccounts;i++)
     {
         info5[i] = new FriendList;
         info5[i]->readfileFL(infileFlist);
     }
     infileFlist.close();
+    //likes
+    Likes** postLikes = new Likes * [numOfPosts];
+    for (int i = 0; i < numOfPosts; i++)
+    {
+        postLikes[i] = new Likes(info2[i]->getPostID());
+    }
+
+
 
     ////////////////////////////////////// BOOT PAGE ////////////////////////////////////////////
     cout << "\t\t\t\t\t        FAST SOCIAL MEDIA APP " << endl;
@@ -145,7 +154,7 @@ void RunApp()
                 cout << "\t\t\t\t****************************************************" << endl;
                 cout << "\t\t\t\t\t\t   Welcome User " << endl;
                 cout << "\t\t\t\t****************************************************" << endl;
-                cout << "\t\t\t\t\t          **( " << info[i]->getFname() << " " << info[i]->getLname() << " )** " << endl;
+                cout << "\t\t\t\t\t        **( " << info[i]->getFname() << " " << info[i]->getLname() << " )** " << endl;
                 cout << endl;
                 cout << endl;
                 loggedIn = true;
@@ -159,19 +168,19 @@ void RunApp()
         }
 
     } while (!loggedIn);
-    
+
     //////////////////////////////////////////////////////////////////////////////////////////////////
     for (int i = 0;i < 1000000000;i++);
     system("cls");
     bool logout = false;
     while (logout == false) // to continue asking user
     {
-       
+
         cout << "\t\t\t\t****************************************************" << endl;
         cout << "\t\t\t\t\t        FAST SOCIAL MEDIA APP " << endl;
         cout << "\t\t\t\t****************************************************" << endl;
         cout << "\t\t\t\t****************************************************" << endl;
-        cout << "\t\t\t\t\t          **( " << info[mainUserID]->getFname() << " " << info[mainUserID]->getLname() << " )** " << endl;
+        cout << "\t\t\t\t\t        **( " << info[mainUserID]->getFname() << " " << info[mainUserID]->getLname() << " )** " << endl;
         cout << endl;
         cout << endl;
         int Commands = 0;
@@ -182,18 +191,20 @@ void RunApp()
         cout << "4-> HOME PAGE" << endl;
         cout << "5-> PAGES" << endl;
         cout << "6-> COMMENTS" << endl;
-        cout << "7-> ADD friend " << endl;
-        cout << "8-> LOGOUT" << endl;
+        cout << "7-> FRIENDLIST " << endl;
+        cout << "8-> MEMORY POST" << endl;
+        cout << "9-> TO LIKE POST" << endl;
+        cout << "10-> LOGOUT" << endl;
         cin >> Commands;
         bool Greater = false;
         while (Greater == false)
         {
-            if (Commands <= 0 || Commands > 8)
+            if (Commands <= 0 || Commands > 10)
             {
                 cout << " Enter again :";
                 cin >> Commands;
             }
-            else if (Commands > 0 || Commands <= 8)
+            else if (Commands > 0 || Commands <= 10)
             {
                 Greater = true;
             }
@@ -280,7 +291,7 @@ void RunApp()
                     }
                 }
             }
-            // delete post
+            ///////////////////////?????????????????????????????? delete post??????????????????????????????????////////////////////
             string AgreeDelPost;
             cout << " Do you want to delete post " << endl;
             cin >> AgreeDelPost;
@@ -319,7 +330,7 @@ void RunApp()
 
                     cout << "Post with ID " << pdelID << " has been successfully deleted." << endl;
                 }
-                // create new post
+                ///////////////////////////////////////////////////// create new post//////////////////////////////////
                 string AgreePost;
                 cout << "Do you want to post? Type [YES] to post, or any other key to cancel." << endl;
                 cin >> AgreePost;
@@ -363,7 +374,7 @@ void RunApp()
             }
         }
         //////////////////////////////////////////// PAGES //////////////////////////////////////////////////////
-        if (Commands == 5) 
+        if (Commands == 5)
         {
             system("cls");
             string showPage;
@@ -416,7 +427,7 @@ void RunApp()
             }
         }
         ////////////////////////////////////////COMMENTS//////////////////////////////////////////////////////
-        if (Commands == 6) 
+        if (Commands == 6)
         {
             system("cls");
             string AgreeComments;
@@ -466,6 +477,7 @@ void RunApp()
                         }
                     }
                 }
+
             }
             string Agreecomment_Add;
             cout << "Do you want to do Comments on Posts ? Type [YES] to visit, or any other key to cancel." << endl;
@@ -488,17 +500,17 @@ void RunApp()
                 newInfo4[numComments - 1] = new Comments;
                 // to get post ID
                 int pID;
-                cout << "Enter the ID of post you want to enter from (1 to " << numOfPosts+1 << " )" << endl;
+                cout << "Enter the ID of post you want to enter from (1 to " << numOfPosts + 1 << " )" << endl;
                 cin >> pID;
                 bool postcommentid = false;
                 while (postcommentid == false)
                 {
-                    if (pID <= 0 || pID > numOfPosts+1)
+                    if (pID <= 0 || pID > numOfPosts + 1)
                     {
                         cout << " Invalid Post ID! Enter again " << endl;
                         cin >> pID;
                     }
-                    else if (pID > 0 || pID < numOfPosts+1)
+                    else if (pID > 0 || pID < numOfPosts + 1)
                     {
                         postcommentid = true;
                     }
@@ -524,16 +536,17 @@ void RunApp()
                 info4 = newInfo4;
             }
         }
-        
-        if (Commands == 8)
+        /////////////////////////////////////logout////////////////////////////////////////////////////////
+        if (Commands == 10)
         {
             cout << "\t\t\t\t****************************************************" << endl;
             cout << "\t\t\t\t\t\t       LOGGING OUT " << endl;
             cout << "\t\t\t\t****************************************************" << endl;
 
-            logout == true;
+            logout = true;
             break;
         }
+        //////////////////////////////////Friend list/////////////////////////////////////////////////
         if (Commands == 7)
         {
             system("cls");
@@ -591,17 +604,83 @@ void RunApp()
                         {
                             info1[i]->DisplayP();
                         }
-
                     }
-                    
                 }
             }
-           
-                    
-            
         }
+        ///////////////////////////////////////////////memory off //////////////////////////////////////
+        if (Commands == 8)
+        {
+            system("cls");
+            string Agree_memory;
+            cout << "Do you want to add Memory ? Type [YES] to visit, or any other key to cancel." << endl;
+            cin >> Agree_memory;
+            if (Agree_memory == "YES" || Agree_memory == "yes")
+            {
+                int pMID;
+                cout << "Enter post ID you want to share as memory from (1 to " << numOfPosts << " )" << endl;
+                cin >> pMID;
+                bool postMid = false;
+                while (postMid == false)
+                {
+                    if (pMID <= 0 || pMID > numOfPosts)
+                    {
+                        cout << " Invalid Post ID! Enter again " << endl;
+                        cin >> pMID;
+                    }
+                    else if (pMID > 0 || pMID < numOfPosts)
+                    {
+                        postMid = true;
+                    }
+                }
+                if (pMID > 0 || pMID < numOfPosts)
+                {
+                    if (info[mainUserID]->getId() == info2[pMID - 1]->getuserPostID())
+                    {
+                        cout << endl << endl;
+                        cout << "POST SHARED AS MEMORY " << endl << endl;
+                        info2[pMID - 1]->DisplayPosts();
+                    }
+                    else
+                    {
+                        cout << "The post doesnot belong to you " << endl;
+                    }
+                }
+            }
+        }
+        if (Commands == 9)
+        {
+            system("cls");
+            int postIndex;
+            cout << "Enter the ID of the post you want to interact with (1 to " << numOfPosts << "): ";
+            cin >> postIndex;
 
-        
+            if (postIndex >= 1 && postIndex <= numOfPosts) {
+                int actualPostIndex = postIndex - 1;
+
+                // Check if the user wants to like the post
+                string agreeLike;
+                cout << "Do you want to like this post? Type [YES] to like, or any other key to skip: " << endl;;
+                cin >> agreeLike;
+
+                if (agreeLike == "YES" || agreeLike == "yes") {
+                    // Add like to the post
+                    postLikes[actualPostIndex]->addLike(info[mainUserID]->getId());
+                }
+
+
+                string showLikes;
+                cout << "Do you want to see who liked this post? Type [YES] to view likes: ";
+                cin >> showLikes;
+
+                if (showLikes == "YES" || showLikes == "yes") {
+                    postLikes[actualPostIndex]->displayLikes();
+                }
+            }
+            else {
+                cout << "Invalid post ID. Please try again." << endl;
+            }
+        }
 
 
 
@@ -685,10 +764,14 @@ void RunApp()
     {
         delete info4[i];  // comments.txt
     }
-    
-    
+    //likes deallocation
+    for (int i = 0; i < numOfPosts; i++)
+    {
+        delete postLikes[i];
+    }
+    delete[] postLikes;
 
 
 
-    
+
 }
