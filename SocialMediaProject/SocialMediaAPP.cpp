@@ -598,6 +598,7 @@ void RunApp()
                             cin >> getID;
                         }
                     }
+                    cout << endl;
                     for (int i = 0;i < numAccounts;i++)
                     {
                         if (info[i]->getId() == getID)
@@ -652,10 +653,11 @@ void RunApp()
         {
             system("cls");
             int postIndex;
-            cout << "Enter the ID of the post you want to interact with (1 to " << numOfPosts << "): ";
+            cout << "Enter the ID of the post you want to interact with (1 to " << numOfPosts << "): " << endl;
             cin >> postIndex;
 
-            if (postIndex >= 1 && postIndex <= numOfPosts) {
+            if (postIndex >= 1 && postIndex <= numOfPosts) 
+            {
                 int actualPostIndex = postIndex - 1;
 
                 // Check if the user wants to like the post
@@ -663,21 +665,24 @@ void RunApp()
                 cout << "Do you want to like this post? Type [YES] to like, or any other key to skip: " << endl;;
                 cin >> agreeLike;
 
-                if (agreeLike == "YES" || agreeLike == "yes") {
+                if (agreeLike == "YES" || agreeLike == "yes") 
+                {
                     // Add like to the post
                     postLikes[actualPostIndex]->addLike(info[mainUserID]->getId());
                 }
 
 
                 string showLikes;
-                cout << "Do you want to see who liked this post? Type [YES] to view likes: ";
+                cout << "Do you want to see who liked this post? Type [YES] to view likes: " << endl;
                 cin >> showLikes;
 
-                if (showLikes == "YES" || showLikes == "yes") {
+                if (showLikes == "YES" || showLikes == "yes") 
+                {
                     postLikes[actualPostIndex]->displayLikes();
                 }
             }
-            else {
+            else 
+            {
                 cout << "Invalid post ID. Please try again." << endl;
             }
         }
