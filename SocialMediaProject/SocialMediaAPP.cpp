@@ -228,6 +228,8 @@ void RunApp()
                 cout << " Password Changed !!!!!!! " << endl;
                 info[mainUserID]->setPassword(passwordchange);
             }
+            for (int i = 0;i < 1000000000;i++);
+
         }
         ////////////////////////////////////////NAME CHANGE/////////////////////////////////////////////
         if (Commands == 2)
@@ -249,6 +251,8 @@ void RunApp()
                 info[mainUserID]->setFname(fNAMEchange);
                 info[mainUserID]->setLname(lNAMEchange);
             }
+            for (int i = 0;i < 1000000000;i++);
+
         }
         /////////////////////////////////////////// Profile Page ////////////////////////////////////////////////
         if (Commands == 3)
@@ -270,10 +274,13 @@ void RunApp()
                 }
 
             }
+            for (int i = 0;i < 1000000000;i++);
+
         }
         ////////////////////////////////////////////HOME PAGE ///////////////////////////////////////////////////
         if (Commands == 4)
         {
+            system("color 40");
             system("cls");
             string AgreeHome;
             cout << "Do you want to Visit HomePage? Type [YES] to visit, or any other key to cancel." << endl;
@@ -296,6 +303,8 @@ void RunApp()
                         }
                     }
                 }
+                for (int i = 0;i < 1000000000;i++);
+
             }
             ///////////////////////?????????????????????????????? delete post??????????????????????????????????////////////////////
             string AgreeDelPost;
@@ -378,10 +387,13 @@ void RunApp()
                     info2 = newInfo2;
                 }
             }
+            for (int i = 0;i < 1000000000;i++);
+
         }
         //////////////////////////////////////////// PAGES //////////////////////////////////////////////////////
         if (Commands == 5)
         {
+            system("color 90");
             system("cls");
             string showPage;
             cout << "\t\t\t\t****************************************************" << endl;
@@ -431,10 +443,13 @@ void RunApp()
                     }
                 }
             }
+            for (int i = 0;i < 1000000000;i++);
+
         }
         ////////////////////////////////////////COMMENTS//////////////////////////////////////////////////////
         if (Commands == 6)
         {
+            system("color 80");
             system("cls");
             string AgreeComments;
             cout << "Do you want to watch Comments on Posts ? Type [YES] to visit, or any other key to cancel." << endl;
@@ -541,10 +556,13 @@ void RunApp()
                 // Point info4 to the new array
                 info4 = newInfo4;
             }
+            for (int i = 0;i < 1000000000;i++);
+
         }
         /////////////////////////////////////logout////////////////////////////////////////////////////////
         if (Commands == 10)
         {
+            system("color 8c");
             cout << "\t\t\t\t****************************************************" << endl;
             cout << "\t\t\t\t\t\t       LOGGING OUT " << endl;
             cout << "\t\t\t\t****************************************************" << endl;
@@ -614,10 +632,13 @@ void RunApp()
                     }
                 }
             }
+            for (int i = 0;i < 1000000000;i++);
+
         }
         ///////////////////////////////////////////////memory off //////////////////////////////////////
         if (Commands == 8)
         {
+            system("color 90");
             system("cls");
             string Agree_memory;
             cout << "Do you want to add Memory ? Type [YES] to visit, or any other key to cancel." << endl;
@@ -654,9 +675,12 @@ void RunApp()
                     }
                 }
             }
+            for (int i = 0;i < 1000000000;i++);
+
         }
         if (Commands == 9)
         {
+            system("color 20");
             system("cls");
             int postIndex;
             cout << "Enter the ID of the post you want to interact with (1 to " << numOfPosts << "): " << endl;
@@ -691,6 +715,8 @@ void RunApp()
             {
                 cout << "Invalid post ID. Please try again." << endl;
             }
+            for (int i = 0;i < 1000000000;i++);
+
         }
 
 
